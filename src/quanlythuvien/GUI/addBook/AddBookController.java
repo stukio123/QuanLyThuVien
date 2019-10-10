@@ -13,7 +13,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
-import quanlythuvien.GUI.dataBase.DBConnector;
+import quanlythuvien.GUI.dataBase.DataBaseConnector;
+import quanlythuvien.model.Sach;
 
 /**
  * FXML Controller class
@@ -35,7 +36,7 @@ public class AddBookController implements Initializable {
     @FXML
     private JFXButton btnHuy;
     
-    DBConnector databasehandler;
+    DataBaseConnector databasehandler;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -57,30 +58,25 @@ public class AddBookController implements Initializable {
             alert.showAndWait();    
             return;
         }
-        String query = "INSERT INTO sach VALUES ("+
-                "'" + id +"'"+
-                "'" + actor + "'" +
-                "'" + type + "'" +
-                "'" + publisher + "'" +
-                " " + true + " " +")";
-        System.out.print(query);
-        if(databasehandler.execAction(query))
-        {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setHeaderText(null);
-            alert.setContentText("Thêm Thành công !");
-            alert.showAndWait(); 
-        }else
-        {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText(null);
-            alert.setContentText("Lỗi");
-            alert.showAndWait(); 
-        }
+        Sach book = new Sach(id,actor,type,publisher,"1");
+        boolean result = DataBaseConnector.insertNewBook(book);
+        if (result) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setHeaderText("Thành Công");
+            alert.setContentText("Nhập sách: " + tensach + "thành công !");
+            clearEntries();
+            alert.showAndWait();
+        } 
+       
     }
 
     @FXML
     private void Cancel(ActionEvent event) {
     }
-    
+    private void clearEntries() {
+        tensach.clear();
+        tacgia.clear();
+        theloai.clear();
+        nhaxuatban.clear();
+    }
 }
