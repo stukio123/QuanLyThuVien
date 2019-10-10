@@ -20,22 +20,22 @@ import quanlythuvien.GUI.dataBase.DBConnector;
  *
  * @author Kyo
  */
-public class AddBookController implements Initializable {
+public class themSachController implements Initializable {
 
-    @FXML
-    private JFXTextField tensach;
-    @FXML
-    private JFXTextField tacgia;
-    @FXML
-    private JFXTextField theloai;
-    @FXML
-    private JFXTextField nhaxuatban;
     @FXML
     private JFXButton btnLuu;
     @FXML
     private JFXButton btnHuy;
     
     DBConnector databasehandler;
+    @FXML
+    private JFXTextField txtTenSach;
+    @FXML
+    private JFXTextField txtTacGia;
+    @FXML
+    private JFXTextField txtTheLoai;
+    @FXML
+    private JFXTextField txtNXB;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -43,11 +43,11 @@ public class AddBookController implements Initializable {
     }    
 
     @FXML
-    private void addBook(ActionEvent event) {
-        String id = tensach.getText();
-        String actor = tacgia.getText();
-        String type = theloai.getText();
-        String publisher = nhaxuatban.getText();
+    private void themSach(ActionEvent event) {
+        String id = txtTenSach.getText();
+        String actor = txtTacGia.getText();
+        String type = txtTheLoai.getText();
+        String publisher = txtNXB.getText();
         
         if(id.isEmpty() || actor.isEmpty() || type.isEmpty() || publisher.isEmpty()) 
         {

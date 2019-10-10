@@ -7,27 +7,26 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="373.0" prefWidth="614.0" stylesheets="@addBook.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="quanlythuvien.GUI.addBook.AddBookController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="346.0" prefWidth="614.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="quanlythuvien.GUI.addBook.AddBookController">
    <children>
       <VBox layoutX="181.0" layoutY="52.0" prefHeight="520.0" prefWidth="614.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <JFXTextField fx:id="idBook" promptText="Tên sách:">
+            <JFXTextField fx:id="tensach" promptText="Tên sách:">
                <VBox.margin>
                   <Insets bottom="15.0" left="15.0" right="15.0" top="20.0" />
                </VBox.margin>
             </JFXTextField>
-            <JFXTextField fx:id="actorBook" promptText="Tên tác giả:">
+            <JFXTextField fx:id="tacgia" promptText="Tên tác giả:">
                <VBox.margin>
                   <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                </VBox.margin>
             </JFXTextField>
-            <JFXTextField fx:id="typeBook" layoutX="25.0" layoutY="30.0" promptText="Thể loại:">
+            <JFXTextField fx:id="theloai" layoutX="25.0" layoutY="30.0" promptText="Thể loại:">
                <VBox.margin>
                   <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                </VBox.margin>
             </JFXTextField>
-            <JFXTextField fx:id="publisherBook" layoutX="25.0" layoutY="91.0" promptText="Nhà sản xuất">
+            <JFXTextField fx:id="nhaxuatban" layoutX="25.0" layoutY="91.0" promptText="Nhà sản xuất">
                <VBox.margin>
                   <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                </VBox.margin>
@@ -37,8 +36,8 @@
                   <Insets top="32.0" />
                </VBox.margin>
                <children>
-                  <JFXButton fx:id="btnAdd" onAction="#addBook" prefHeight="102.0" prefWidth="307.0" />
-                  <JFXButton fx:id="btnCancel" layoutX="10.0" layoutY="10.0" onAction="#Cancel" prefHeight="110.0" prefWidth="322.0" />
+                  <JFXButton fx:id="btnLuu" onAction="#addBook" prefHeight="102.0" prefWidth="307.0" text="Lưu" />
+                  <JFXButton fx:id="btnHuy" layoutX="10.0" layoutY="10.0" onAction="#Cancel" prefHeight="65.0" prefWidth="312.0" text="Hủy" />
                </children>
             </HBox>
          </children>
