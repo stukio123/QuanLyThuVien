@@ -23,17 +23,17 @@ import quanlythuvien.GUI.dataBase.DBConnector;
 public class AddBookController implements Initializable {
 
     @FXML
-    private JFXTextField idBook;
+    private JFXTextField tensach;
     @FXML
-    private JFXTextField actorBook;
+    private JFXTextField tacgia;
     @FXML
-    private JFXTextField typeBook;
+    private JFXTextField theloai;
     @FXML
-    private JFXTextField publisherBook;
+    private JFXTextField nhaxuatban;
     @FXML
-    private JFXButton btnAdd;
+    private JFXButton btnLuu;
     @FXML
-    private JFXButton btnCancel;
+    private JFXButton btnHuy;
     
     DBConnector databasehandler;
 
@@ -44,10 +44,10 @@ public class AddBookController implements Initializable {
 
     @FXML
     private void addBook(ActionEvent event) {
-        String id = idBook.getText();
-        String actor = actorBook.getText();
-        String type = typeBook.getText();
-        String publisher = publisherBook.getText();
+        String id = tensach.getText();
+        String actor = tacgia.getText();
+        String type = theloai.getText();
+        String publisher = nhaxuatban.getText();
         
         if(id.isEmpty() || actor.isEmpty() || type.isEmpty() || publisher.isEmpty()) 
         {
