@@ -15,7 +15,7 @@ import javafx.stage.Stage;
  *
  * @author Kyo
  */
-public class QuanLyThuVien extends Application {
+public class QuanLyThemSach extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {

@@ -21,22 +21,26 @@ import quanlythuvien.model.Sach;
  *
  * @author Kyo
  */
-public class AddBookController implements Initializable {
+public class themSachController implements Initializable {
 
-    @FXML
-    private JFXTextField tensach;
-    @FXML
-    private JFXTextField tacgia;
-    @FXML
-    private JFXTextField theloai;
-    @FXML
-    private JFXTextField nhaxuatban;
     @FXML
     private JFXButton btnLuu;
     @FXML
     private JFXButton btnHuy;
     
+<<<<<<< HEAD:src/quanlythuvien/GUI/addBook/AddBookController.java
     DataBaseConnector databasehandler;
+=======
+    DBConnector databasehandler;
+    @FXML
+    private JFXTextField txtTenSach;
+    @FXML
+    private JFXTextField txtTacGia;
+    @FXML
+    private JFXTextField txtTheLoai;
+    @FXML
+    private JFXTextField txtNXB;
+>>>>>>> d6e71583457c43741e45a9cc69fdc690a22d9f73:src/quanlythuvien/GUI/addBook/themSachController.java
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -44,11 +48,11 @@ public class AddBookController implements Initializable {
     }    
 
     @FXML
-    private void addBook(ActionEvent event) {
-        String id = tensach.getText();
-        String actor = tacgia.getText();
-        String type = theloai.getText();
-        String publisher = nhaxuatban.getText();
+    private void themSach(ActionEvent event) {
+        String id = txtTenSach.getText();
+        String actor = txtTacGia.getText();
+        String type = txtTheLoai.getText();
+        String publisher = txtNXB.getText();
         
         if(id.isEmpty() || actor.isEmpty() || type.isEmpty() || publisher.isEmpty()) 
         {
