@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="542.0" prefWidth="722.0" stylesheets="@ThemSach.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.DangNhapController">
+   <children>
+      <VBox alignment="CENTER" layoutX="272.0" layoutY="102.0" prefHeight="542.0" prefWidth="722.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label contentDisplay="CENTER" text="Quản Lý Thư Viện">
+               <font>
+                  <Font name="System Bold" size="40.0" />
+               </font>
+            </Label>
+            <AnchorPane prefHeight="484.0" prefWidth="722.0">
+               <children>
+                  <Label layoutX="38.0" layoutY="77.0" text="Tên đăng nhập :" AnchorPane.leftAnchor="40.0">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="38.0" layoutY="136.0" text="Mật khẩu :" AnchorPane.leftAnchor="40.0">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Label>
+                  <JFXPasswordField fx:id="txtMatKhau" disable="true" layoutX="292.0" layoutY="143.0" onAction="#DangNhap" prefHeight="31.0" prefWidth="409.0" AnchorPane.rightAnchor="40.0" />
+                  <JFXTextField fx:id="txtTaiKhoan" disable="true" layoutX="292.0" layoutY="84.0" prefHeight="31.0" prefWidth="409.0" AnchorPane.rightAnchor="40.0" />
+                  <JFXButton layoutX="38.0" layoutY="364.0" onAction="#DangNhap" prefHeight="80.0" prefWidth="227.0" text="Đăng Nhập" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="40.0">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton layoutX="433.0" layoutY="364.0" onAction="#Thoat" prefHeight="80.0" prefWidth="227.0" text="Thoát" AnchorPane.bottomAnchor="40.0" AnchorPane.rightAnchor="40.0">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </JFXButton>
+                  <RadioButton layoutX="70.0" layoutY="269.0" mnemonicParsing="false" onAction="#checkAdmin" text="Administrator" AnchorPane.leftAnchor="70.0">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <toggleGroup>
+                        <ToggleGroup fx:id="AccessRule" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton layoutX="468.0" layoutY="269.0" mnemonicParsing="false" onAction="#checkDocGia" text="Đọc Giả" toggleGroup="$AccessRule" AnchorPane.rightAnchor="70.0">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </RadioButton>
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

@@ -8,19 +8,14 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-<<<<<<< HEAD
-    <jar href="QuanLyThuVien.jar" size="7694" download="eager" />
-=======
-    <jar href="QuanLyThuVien.jar" size="6305" download="eager" />
->>>>>>> d6e71583457c43741e45a9cc69fdc690a22d9f73
+    <jar href="QuanLyThuVien.jar" size="19275" download="eager" />
     <jar href="lib\jfoenix-8.0.8.jar" size="2708772" download="eager" />
-    <jar href="lib\mysql-connector-java-5.1.23-bin.jar" size="834126" download="eager" />
-    <jar href="lib\mysql-connector-java-8.0.16.jar" size="2293144" download="eager" />
-    <jar href="lib\org-netbeans-modules-java-j2seproject-copylibstask.jar" size="26716" download="eager" />
+    <jar href="lib\mysql-connector-java-8.0.18.jar" size="2330539" download="eager" />
+    <jar href="lib\rs2xml.jar" size="171578" download="eager" />
   </resources>
   <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="QuanLyThuVien" >
     <param name="requiredFXVersion" value="8.0+"/>
   </applet-desc>
-  <jfx:javafx-desc  width="800" height="600" main-class="quanlythuvien.GUI.addBook.QuanLyThuVien"  name="QuanLyThuVien" />
+  <jfx:javafx-desc  width="800" height="600" main-class="GUI.QuanLyThuVien"  name="QuanLyThuVien" />
   <update check="always"/>
 </jnlp>
