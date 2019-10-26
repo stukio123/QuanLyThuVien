@@ -8,12 +8,16 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -25,6 +29,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 public class TimSachController implements Initializable {
@@ -55,57 +60,92 @@ public class TimSachController implements Initializable {
     private TextField txtSoLuong;
     @FXML
     private TextField txtGiaTien;
+    @FXML
+    private TextField txtTim;
     
     private ObservableList<Sach> oblist;
+    
+//    private ObservableList<Sach> getSach() throws SQLException{
+//        Connection conn = DataBaseConnector.getConnection();
+//        Statement stmt = conn.createStatement();
+//        ResultSet rs = stmt.executeQuery("SELECT * FORM quanlythuvien.sach;");
+//        List<Sach> ls = new ArrayList<>();
+//        while (rs.next())
+//        {
+//            
+//        }
+//    };
     private DataBaseConnector dc;
     String c1;
     
-    public static String sql = "SELECT * FROM quanlythuvien.sach order by Ma_Sach ;";
     
-    private ObservableList<Sach> getSach(){
-        ObservableList<Sach> getsach = FXCollections.observableArrayList();
-        getsach.add(new Sach("Cersei","Lannister","Queen Regent","123",100000,169));
-        getsach.add(new Sach("Cersei","Lannister","Queen Regent","123",100000,169));
-        getsach.add(new Sach("Cersei","Lannister","Queen Regent","123",100000,169));
-
-        return getsach;
-    }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-//        try {
-//            Connection conn = DataBaseConnector.getConnection();
-//            oblist = FXCollections.observableArrayList();
-//            ResultSet rs = conn.createStatement().executeQuery("SELECT * FROM quanlythuvien.sach;");
-//            while(rs.next())
-//            {
-//                oblist.add(new Sach (rs.getString("Ma_Sach"),rs.getString("Ten_Sach"),
-//                        rs.getString("Ten_Tac_gia"),rs.getString("Nha_xb"),
-//                        rs.getInt("Gia_tien"),
-//                        rs.getInt("So_luong")));
-//            }
-//        } catch (SQLException ex) {
-//            Logger.getLogger(TimSachController.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-        maSach.setCellValueFactory(new PropertyValueFactory<>("Ma_Sach"));
+        LoadData("SELECT * FROM quanlythuvien.sach;");
+    }
+    
+    public void LoadData(String sql){
+        try {
+            Connection conn = DataBaseConnector.getConnection();
+            oblist = FXCollections.observableArrayList();
+            ResultSet rs = conn.createStatement().executeQuery(sql);
+            while(rs.next())
+            {
+                oblist.add(new Sach (rs.getString("Ma_Sach"),rs.getString("Ten_Sach"),
+                        rs.getString("Ten_Tac_gia"),rs.getString("Nha_xb"),
+                        rs.getInt("Gia_tien"),
+                        rs.getInt("So_luong")));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(TimSachController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        maSach.setCellValueFactory(new PropertyValueFactory<>("maSach"));
         
-        tenSach.setCellValueFactory(new PropertyValueFactory<>("Ten_Sach"));
+        tenSach.setCellValueFactory(new PropertyValueFactory<>("tenSach"));
         
-        tenTacGia.setCellValueFactory(new PropertyValueFactory<>("Ten_Tac_gia"));
+        tenTacGia.setCellValueFactory(new PropertyValueFactory<>("tenTacGia"));
         
-        nhaXuatBan.setCellValueFactory(new PropertyValueFactory<>("Nha_xb"));
+        nhaXuatBan.setCellValueFactory(new PropertyValueFactory<>("nhaXB"));
         
-        giaTien.setCellValueFactory(new PropertyValueFactory<>("Gia_tien"));
+        giaTien.setCellValueFactory(new PropertyValueFactory<>("giaTien"));
         
-        soLuong.setCellValueFactory(new PropertyValueFactory<>("So_luong"));
+        soLuong.setCellValueFactory(new PropertyValueFactory<>("soLuong"));
 
-        tbSach.setItems(getSach());
+        tbSach.setItems(oblist);
     }
     
-    public void LoadData(){
-         
+    public void TimSach(ActionEvent event){
+        if(this.txtTim.getText().length() == 0) {
+            String sql = "SELECT * from SACH ";
+            LoadData(sql);
+        }
+        else {
+            String sql = "SELECT * from SACH WHERE Ma_Sach like N'%"+this.txtTim.getText()+"%' "
+                    + "or Ten_Sach like N'%"+this.txtTim.getText()+"%'"
+                    + "or Ten_Tac_gia like N'%"+this.txtTim.getText()+"%'"
+                    + "or Nha_xb like N'%"+this.txtTim.getText()+"%'";
+            LoadData(sql);
+        }
     }
-    
+    @FXML
+    public void chonSach(MouseEvent event){
+        String MaSach = tbSach.getSelectionModel().getSelectedItem().getMaSach();
+        String sql = "SELECT * FROM SACH where Ma_Sach='"+MaSach+"'";
+        ResultSet rs = UpdateTable.ShowTextField(sql);
+        try {
+            if(rs.next()) {
+                this.txtMaSach.setText(rs.getString("Ma_Sach"));
+                this.txtTenSach.setText(rs.getString("Ten_Sach"));
+                this.txtNXB.setText(rs.getString("Nha_Xb"));
+                this.txtTenTacGia.setText(rs.getString("Ten_Tac_gia"));
+                this.txtGiaTien.setText((rs.getString("Gia_tien")));
+                this.txtSoLuong.setText(rs.getString("So_luong"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(TimSachController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     @FXML
     public void DangXuat(ActionEvent event) throws IOException{
