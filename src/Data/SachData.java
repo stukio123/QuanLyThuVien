@@ -19,7 +19,7 @@ public class SachData {
     }
     
      public static void InsertSach(Sach s) {
-        String sql = "insert into SACH values(?,?,?,?,?,?,?)";
+        String sql = "insert into `quanlythuvien`.`sach` values(?,?,?,?,?,?)";
         try {
             ps = DataBaseConnector.getConnection().prepareStatement(sql);
             ps.setString(1, s.getMaSach());
@@ -28,7 +28,6 @@ public class SachData {
             ps.setString(4, s.getNhaXB());
             ps.setInt(5, s.getGiaTien());
             ps.setInt(6, s.getSoLuong());
-            ps.setString(7, "Nguyễn Hoàng Hải");
             ps.execute();
             JOptionPane.showMessageDialog(null, "Đã thêm sách thành công!" , "Thông báo", 1);
         } catch(Exception e) {

@@ -12,7 +12,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="903.0" prefWidth="973.0" stylesheets="@ThemSach.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.AdminCapNhatController">
    <children>
       <AnchorPane prefHeight="917.0" prefWidth="973.0">
@@ -28,8 +27,8 @@
                                     <Font size="20.0" />
                                  </font>
                               </JFXButton>
-                              <TextField layoutX="326.0" layoutY="45.0" prefHeight="31.0" prefWidth="305.0" />
-                              <JFXButton fx:id="btnNhap" layoutX="639.0" layoutY="39.0" text="Nhập mới">
+                              <TextField fx:id="txtTim" layoutX="326.0" layoutY="45.0" prefHeight="31.0" prefWidth="305.0" />
+                              <JFXButton fx:id="btnChinhSua" layoutX="639.0" layoutY="39.0" onAction="#ChinhSua" text="Nhập mới">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
@@ -84,6 +83,9 @@
                                     </TableView>
                                  </children>
                               </JFXScrollPane>
+                              <JFXButton fx:id="btnThem" disable="true" layoutX="136.0" layoutY="110.0" onAction="#ThemSach" text="Thêm" AnchorPane.leftAnchor="136.0" />
+                              <JFXButton fx:id="btnSua" disable="true" layoutX="458.0" layoutY="110.0" onAction="#SuaSach" text="Sửa" />
+                              <JFXButton fx:id="btnXoa" disable="true" layoutX="850.0" layoutY="110.0" onAction="#XoaSach" text="Xóa" AnchorPane.rightAnchor="136.0" />
                            </children>
                         </AnchorPane>
                      </content>

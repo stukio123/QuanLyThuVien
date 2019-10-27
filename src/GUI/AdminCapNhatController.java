@@ -1,7 +1,9 @@
 package GUI;
 
 import Data.DataBaseConnector;
+import Data.SachData;
 import Object.Sach;
+import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -26,6 +28,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javax.swing.JOptionPane;
 
 public class AdminCapNhatController implements Initializable {
     
@@ -57,8 +60,18 @@ public class AdminCapNhatController implements Initializable {
     private TextField txtGiaTien;
     @FXML
     private TextField txtTim;
+    @FXML
+    private JFXButton btnChinhSua;
+    @FXML
+    private JFXButton btnThem;
+    @FXML
+    private JFXButton btnSua;
+    @FXML
+    private JFXButton btnXoa;
     
     private ObservableList<Sach> oblist;
+    
+    SachData sachdata = new SachData();
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -66,6 +79,36 @@ public class AdminCapNhatController implements Initializable {
         DataBaseConnector.getConnection();
     }
     
+    @FXML
+    public void SuaSach(ActionEvent event){
+        Sach s = new Sach(this.txtMaSach.getText(), this.txtTenSach.getText(), this.txtTenTacGia.getText(),this.txtNXB.getText(),
+             Integer.parseInt(this.txtGiaTien.getText()),Integer.parseInt(this.txtSoLuong.getText()));
+        if(sachdata.UpdateSach(s)) {
+            JOptionPane.showMessageDialog(null, "Bạn đã sửa thành công", "Thông báo", 1);
+        }else JOptionPane.showMessageDialog(null, "Có lỗi xảy ra", "Thông báo", 2);
+        LoadData("SELECT * FROM quanlythuvien.sach;");
+    }
+    
+    @FXML
+    public void XoaSach(ActionEvent event){
+        if(sachdata.DeleteSach(this.txtMaSach.getText())) {
+                JOptionPane.showMessageDialog(null, "Bạn đã xóa thành công", "Thông báo", 1);
+            }
+            else JOptionPane.showMessageDialog(null, "Có lỗi xảy ra", "Thông báo", 2);
+        LoadData("SELECT * FROM quanlythuvien.sach;");
+    }
+    @FXML
+    public void ThemSach(ActionEvent event){
+        if (this.txtMaSach.getText().length()==0) JOptionPane.showMessageDialog(null, "Mã sách không thể bỏ trống", "thông báo", 2);
+        else if(this.txtMaSach.getText().length()>10) JOptionPane.showMessageDialog(null, "Mã sách không được lớn hơn 10 ký tự", "thông báo", 2);
+        else {
+            Sach s = new Sach(this.txtMaSach.getText(), this.txtTenSach.getText(), this.txtTenTacGia.getText(),this.txtNXB.getText(),
+             Integer.parseInt(this.txtGiaTien.getText()),Integer.parseInt(this.txtSoLuong.getText()));
+            SachData.InsertSach(s);
+            LoadData("SELECT * FROM quanlythuvien.sach;");
+        }
+    }
+    @FXML
     public void LoadData(String sql){
         try {
             Connection conn = DataBaseConnector.getConnection();
@@ -96,7 +139,26 @@ public class AdminCapNhatController implements Initializable {
 
         tbSach.setItems(oblist);
     }
+    @FXML
+    public void ChinhSua(ActionEvent event){
+        btnThem.setDisable(false);
+        btnSua.setDisable(true);
+        btnXoa.setDisable(true);
+        txtMaSach.clear();
+        txtMaSach.setEditable(true);
+        txtTenSach.clear();
+        txtTenSach.setEditable(true);
+        txtTenTacGia.clear();
+        txtTenTacGia.setEditable(true);
+        txtNXB.clear();
+        txtNXB.setEditable(true);
+        txtSoLuong.clear();
+        txtSoLuong.setEditable(true);
+        txtGiaTien.clear();
+        txtGiaTien.setEditable(true);
+    }
     
+    @FXML
     public void TimSach(ActionEvent event){
         if(this.txtTim.getText().length() == 0) {
             String sql = "SELECT * from SACH ";
@@ -113,6 +175,15 @@ public class AdminCapNhatController implements Initializable {
     
     @FXML
     public void chonSach(MouseEvent event){
+        btnThem.setDisable(true);
+        btnSua.setDisable(false);
+        btnXoa.setDisable(false);
+//        txtMaSach.setEditable(false);
+//        txtTenSach.setEditable(false);
+//        txtTenTacGia.setEditable(false);
+//        txtNXB.setEditable(false);
+//        txtSoLuong.setEditable(false);
+//        txtGiaTien.setEditable(false);
         Connection conn = DataBaseConnector.getConnection();
         String MaSach = tbSach.getSelectionModel().getSelectedItem().getMaSach();
         String sql = "SELECT * FROM SACH where Ma_Sach='"+MaSach+"'";
