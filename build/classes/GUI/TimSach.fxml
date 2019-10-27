@@ -63,12 +63,12 @@
                   <Font size="20.0" />
                </font>
             </Label>
-            <TextField fx:id="txtMaSach" layoutX="149.0" layoutY="72.0" prefHeight="31.0" prefWidth="314.0" AnchorPane.rightAnchor="510.0" />
-            <TextField fx:id="txtTenSach" layoutX="149.0" layoutY="122.0" prefHeight="31.0" prefWidth="314.0" AnchorPane.rightAnchor="510.0" />
-            <TextField fx:id="txtTenTacGia" layoutX="149.0" layoutY="172.0" prefHeight="31.0" prefWidth="314.0" AnchorPane.rightAnchor="510.0" />
-            <TextField fx:id="txtNXB" layoutX="618.0" layoutY="72.0" prefHeight="31.0" prefWidth="314.0" />
-            <TextField fx:id="txtGiaTien" layoutX="618.0" layoutY="127.0" prefHeight="31.0" prefWidth="314.0" />
-            <TextField fx:id="txtSoLuong" layoutX="618.0" layoutY="172.0" prefHeight="31.0" prefWidth="314.0" />
+            <TextField fx:id="txtMaSach" layoutX="149.0" layoutY="72.0" prefHeight="31.0" prefWidth="314.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="510.0" />
+            <TextField fx:id="txtTenSach" layoutX="149.0" layoutY="122.0" prefHeight="31.0" prefWidth="314.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="510.0" />
+            <TextField fx:id="txtTenTacGia" layoutX="149.0" layoutY="172.0" prefHeight="31.0" prefWidth="314.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="510.0" />
+            <TextField fx:id="txtNXB" layoutX="618.0" layoutY="72.0" prefHeight="31.0" prefWidth="314.0" AnchorPane.leftAnchor="618.0" AnchorPane.rightAnchor="41.0" />
+            <TextField fx:id="txtGiaTien" layoutX="618.0" layoutY="127.0" prefHeight="31.0" prefWidth="314.0" AnchorPane.leftAnchor="618.0" />
+            <TextField fx:id="txtSoLuong" layoutX="618.0" layoutY="172.0" prefHeight="31.0" prefWidth="314.0" AnchorPane.leftAnchor="618.0" AnchorPane.rightAnchor="41.0" />
          </children>
       </AnchorPane>
       <JFXScrollPane prefHeight="485.0" prefWidth="973.0">
@@ -79,7 +79,7 @@
                 <TableColumn fx:id="tenSach" prefWidth="270.0" text="Tên sách" />
                   <TableColumn fx:id="tenTacGia" prefWidth="155.0" text="Tên tác giả" />
                   <TableColumn fx:id="nhaXuatBan" prefWidth="210.0" text="Nhà xuất bản" />
-                  <TableColumn fx:id="soLuong" prefWidth="107.0" text="Số Lượng" />
+                  <TableColumn fx:id="soLuong" prefWidth="107.0" text="Số Trang" />
                   <TableColumn fx:id="giaTien" prefWidth="155.0" text="Giá tiền" />
               </columns>
             </TableView>

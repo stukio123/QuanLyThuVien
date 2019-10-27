@@ -13,7 +13,7 @@ public class DocGiaData {
     public static ResultSet rs;
     
     public DocGia dangNhap(String taiKhoan, String pass) {
-        DocGia kh = new DocGia();
+        DocGia kh = null;
         try {
             ps = DataBaseConnector.getConnection().prepareStatement("SELECT * FROM quanlythuvien.khach_hang where Ma_Khach_hang = ? and Mat_Khau = ?;");
             ps.setString(1, taiKhoan);

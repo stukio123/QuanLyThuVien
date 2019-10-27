@@ -27,8 +27,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-public class TimSachController implements Initializable {
-
+public class AdminCapNhatController implements Initializable {
+    
     @FXML
     private TableView<Sach> tbSach;
     @FXML
@@ -78,9 +78,10 @@ public class TimSachController implements Initializable {
                         rs.getInt("Gia_tien"),
                         rs.getInt("So_luong")));
             }
-        } catch (SQLException ex) {
+            } catch (SQLException ex) {
             Logger.getLogger(TimSachController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            }
+        
         maSach.setCellValueFactory(new PropertyValueFactory<>("maSach"));
         
         tenSach.setCellValueFactory(new PropertyValueFactory<>("tenSach"));
@@ -109,6 +110,7 @@ public class TimSachController implements Initializable {
             LoadData(sql);
         }
     }
+    
     @FXML
     public void chonSach(MouseEvent event){
         Connection conn = DataBaseConnector.getConnection();
@@ -131,10 +133,10 @@ public class TimSachController implements Initializable {
     }
 
     @FXML
-    public void DangXuat(ActionEvent event) throws IOException{
+    public void quayLai(ActionEvent event) throws IOException{
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("DangNhap.fxml"));
+        loader.setLocation(getClass().getResource("ChucNang.fxml"));
         Parent ChucNang = loader.load();
         Scene scene = new Scene(ChucNang);
         stage.setScene(scene);

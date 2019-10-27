@@ -43,7 +43,7 @@
                         <Font size="25.0" />
                      </font>
                   </JFXButton>
-                  <RadioButton layoutX="70.0" layoutY="269.0" mnemonicParsing="false" onAction="#checkAdmin" text="Administrator" AnchorPane.leftAnchor="70.0">
+                  <RadioButton fx:id="admin" layoutX="70.0" layoutY="269.0" mnemonicParsing="false" onAction="#checkAdmin" text="Administrator" AnchorPane.leftAnchor="70.0">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -51,7 +51,7 @@
                         <ToggleGroup fx:id="AccessRule" />
                      </toggleGroup>
                   </RadioButton>
-                  <RadioButton layoutX="468.0" layoutY="269.0" mnemonicParsing="false" onAction="#checkDocGia" text="Đọc Giả" toggleGroup="$AccessRule" AnchorPane.rightAnchor="70.0">
+                  <RadioButton fx:id="docGia" layoutX="468.0" layoutY="269.0" mnemonicParsing="false" onAction="#checkDocGia" text="Đọc Giả" toggleGroup="$AccessRule" AnchorPane.rightAnchor="70.0">
                      <font>
                         <Font size="20.0" />
                      </font>
