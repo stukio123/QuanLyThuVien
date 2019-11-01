@@ -71,7 +71,7 @@ public class FXMLSachController implements Initializable {
     public void loadSach(List a) throws SQLException{
 
 
-            tbcMaSach.setCellValueFactory(new PropertyValueFactory<>("maSach"));
+        tbcMaSach.setCellValueFactory(new PropertyValueFactory<>("maSach"));
 
         tbcTenSach.setCellValueFactory(new PropertyValueFactory<>("tenSach"));
 
@@ -164,6 +164,22 @@ public class FXMLSachController implements Initializable {
         Scene scene = new Scene(ChucNang);
         stage.setScene(scene);
         stage.show();
+        
+    }
+    
+    public void btChinhSuaHandler(ActionEvent event) throws IOException{
+        
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLChinhSuaSach.fxml"));
+        Stage stage = new Stage();
+        Parent rootl = (Parent) loader.load();
+        Stage stageDangNhap = new Stage();
+        Scene sceneDN =  new Scene(rootl);
+        FXMLChinhSuaSachController controller = loader.getController();
+        Sach selected = tbvSach.getSelectionModel().getSelectedItem();
+        controller.setSach(selected);
+        stageDangNhap.setScene(sceneDN);        
+        stageDangNhap.show();
+        
     }
     
 }

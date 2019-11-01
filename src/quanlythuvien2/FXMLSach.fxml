@@ -75,7 +75,7 @@
                   </ImageView>
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="btnSua" disable="true" graphicTextGap="10.0" prefWidth="120.0" text="Cập Nhập">
+            <JFXButton fx:id="btnSua" disable="true" graphicTextGap="10.0" onAction="#btChinhSuaHandler" prefWidth="120.0" text="Cập Nhập">
                <styleClass>
                   <String fx:value="btCapNhap" />
                   <String fx:value="Sua" />
