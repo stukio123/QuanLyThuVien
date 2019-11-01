@@ -1,0 +1,78 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Oct 31, 2019, 6:37:24 PM
+    Author     : Tran Nguyen Anh
+*/
+
+HBox.hboxDau{
+    -fx-background-color: #006699;
+    -fx-alignment: CENTER;
+}
+
+HBox.hboxCapNhat{
+    -fx-alignment: center-right;
+    -fx-spacing: 10;
+}
+
+VBoxChinh{
+    -fx-alignment: CENTER;
+
+}
+
+Text{
+    -fx-font-family: Tahoma;
+    -fx-font-size: 38;
+    -fx-fill: white;
+}
+
+JFXButton.btChucNang{
+    -fx-background-color: #006699;
+    -fx-padding: 20 20 20 20;
+    -fx-text-fill: white;
+}
+
+
+JFXButton.btCapNhap{
+    -fx-padding: 5 5 5 5;
+}
+
+JFXButton.btCapNhap.Xoa{
+    -fx-background-color: #cc0000;
+}
+
+JFXButton.btCapNhap.Xem{
+    -fx-background-color: #000099;
+}
+JFXButton.btCapNhap.Them{
+    -fx-background-color: #009900;
+}
+
+
+
+JFXButton.btCapNhap.Sua{
+    -fx-background-color: #ff6600;
+}
+
+
+JFXTextField{
+    -fx-background-color: white;
+}
+
+TableColumn{
+    -fx-text-fill: black;
+    
+}
+
+JFXButton{
+    -fx-background-color: limegreen;
+    -fx-text-fill: white;
+    -fx-font-size: 15;
+}
+
+JFXComboBox{
+    -fx-background-color: white;
+}

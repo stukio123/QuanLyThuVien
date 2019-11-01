@@ -1,0 +1,36 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Oct 31, 2019, 12:48:01 PM
+    Author     : Tran Nguyen Anh
+*/
+
+
+
+Text{
+    -fx-font-family: Tahoma;
+    -fx-font-size: 38;
+    -fx-fill: lightseagreen;
+    -fx-padding: 10 10 10 10;
+}
+
+
+JFXButton{
+    -fx-background-color: lightseagreen;
+    -fx-text-fill: white;
+    -fx-padding: 10 10 10 10;   
+   -fx-start-margin: 10;
+   -fx-font-size: 15;
+}
+
+
+JFXRadioButton{
+    -fx-font-size: 15;
+}
+
+Label{
+    -fx-font-size: 15;
+}

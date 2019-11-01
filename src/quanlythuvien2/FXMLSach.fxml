@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="755.0" prefWidth="1124.0" stylesheets="@styleSach.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="quanlythuvien2.FXMLSachController">
+   <children>
+      <HBox prefHeight="107.0" prefWidth="1010.0" styleClass="hboxDau">
+         <children>
+            <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/books-64.png" />
+               </image>
+               <HBox.margin>
+                  <Insets left="10.0" right="20.0" />
+               </HBox.margin>
+            </ImageView>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Quản Lý Sách">
+               <HBox.margin>
+                  <Insets right="30.0" />
+               </HBox.margin></Text>
+            <JFXTextField fx:id="txtTim" prefHeight="25.0" prefWidth="320.0" promptText="Tìm Kiếm">
+               <HBox.margin>
+                  <Insets left="20.0" right="10.0" />
+               </HBox.margin></JFXTextField>
+            <JFXButton contentDisplay="CENTER" onAction="#TimSach" prefHeight="29.0" prefWidth="44.0" text=" ">
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/search-13-24.png" />
+                     </image>
+                  </ImageView>
+               </graphic></JFXButton>
+            <JFXComboBox fx:id="cbLoai" prefHeight="25.0" prefWidth="191.0" />
+         </children>
+      </HBox>
+      <HBox prefHeight="63.0" prefWidth="990.0" styleClass="hboxCapNhat" stylesheets="@styleSach.css">
+         <children>
+            <JFXButton graphicTextGap="10.0" prefWidth="120.0" text="Xem">
+               <styleClass>
+                  <String fx:value="btCapNhap" />
+                  <String fx:value="Xem" />
+               </styleClass>
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/eye-3-24.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+            <JFXButton graphicTextGap="10.0" onAction="#btThemHandler" prefWidth="120.0" text="Thêm">
+               <styleClass>
+                  <String fx:value="btCapNhap" />
+                  <String fx:value="Them" />
+               </styleClass>
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/plus-5-24.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="btnSua" disable="true" graphicTextGap="10.0" prefWidth="120.0" text="Cập Nhập">
+               <styleClass>
+                  <String fx:value="btCapNhap" />
+                  <String fx:value="Sua" />
+               </styleClass>
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/settings-24-24.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="btnXoa" disable="true" graphicTextGap="10.0" onAction="#XoaSach" prefWidth="120.0" text="Xóa">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+               <styleClass>
+                  <String fx:value="btCapNhap" />
+                  <String fx:value="Xoa" />
+               </styleClass>
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/delete-24.png" />
+                     </image>
+                  </ImageView>
+               </graphic></JFXButton>
+         </children>
+         <VBox.margin>
+            <Insets bottom="10.0" right="10.0" top="20.0" />
+         </VBox.margin>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="462.0" prefWidth="1107.0">
+         <children>
+            <VBox prefHeight="455.0" prefWidth="218.0">
+               <children>
+                  <JFXButton prefHeight="70.0" prefWidth="190.0" styleClass="btChucNang" text="Quản Lý Sách">
+                     <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </JFXButton>
+                  <JFXButton prefHeight="70.0" prefWidth="190.0" styleClass="btChucNang" text="Quản Lý Độc Giả">
+                     <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </JFXButton>
+                  <JFXButton prefHeight="70.0" prefWidth="190.0" styleClass="btChucNang" text="Quản Lý Mượn Sách">
+                     <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </JFXButton>
+                  <JFXButton prefHeight="70.0" prefWidth="190.0" styleClass="btChucNang" text="Quản Lý Trả Sách">
+                     <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </JFXButton>
+                  <JFXButton prefHeight="70.0" prefWidth="190.0" styleClass="btChucNang" text="Quản Lý Nhân Viên">
+                     <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </JFXButton>
+                  <JFXButton prefHeight="70.0" prefWidth="190.0" styleClass="btChucNang" text="Thông Kê">
+                     <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </JFXButton>
+               </children>
+            </VBox>
+            <TableView fx:id="tbvSach" onMouseClicked="#ChonSach" prefHeight="455.0" prefWidth="864.0">
+              <columns>
+                <TableColumn fx:id="tbcMaSach" prefWidth="75.0" text="Mã Sách" />
+                <TableColumn fx:id="tbcTenSach" prefWidth="226.0" text="Tên Sách" />
+                  <TableColumn fx:id="tbcTacGia" prefWidth="145.0" text="Tác Giả" />
+                  <TableColumn fx:id="tbcTheLoai" prefWidth="128.0" text="Thể Loại" />
+                  <TableColumn fx:id="tbcNxb" prefWidth="193.0" text="Nhà Xuất Bản" />
+                  <TableColumn fx:id="tbcSoLuong" prefWidth="96.0" text="Số Lượng" />
+              </columns>
+            </TableView>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <JFXButton graphicTextGap="10.0" onAction="#btQuayLaiHandler" text="Quay Lại">
+               <graphic>
+                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/logout-32.png" />
+                     </image>
+                  </ImageView>
+               </graphic></JFXButton>
+         </children>
+      </HBox>
+   </children>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+</VBox>

@@ -1,0 +1,71 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Oct 31, 2019, 7:15:33 PM
+    Author     : Tran Nguyen Anh
+*/
+
+
+VBox.Chinh{
+    -fx-alignment: CENTER;
+    
+}
+
+HBox.hboxDau{
+    -fx-background-color: #006699;
+    -fx-alignment: CENTER;
+    -fx-padding: 10 10 10 10;
+    -fx-spacing: 10;
+}
+
+Text{
+    -fx-fill: white;
+    -fx-font-family: Tahoma;
+    -fx-font-size: 38;
+    
+}
+
+HBox.hboxThongTin{
+    -fx-spacing: 10;
+    -fx-padding: 10 0 5 0;
+    
+}
+
+VBox.vboxThongTin{
+    -fx-padding: 5 10 10 10;
+    -fx-alignment: CENTER_LEFT;
+    
+}
+
+
+JFXTextField{
+    -fx-padding: 10 0 5 0;   
+}
+
+JFXDatePicker{
+/*    -fx-padding: 10 0 5 0;*/
+}
+
+JFXButton.btThem{
+    -fx-background-color: #009900;
+}
+
+JFXButton.btHuy{
+    -fx-background-color: #cc0000;
+}
+JFXButton{
+      -fx-text-fill: white;
+      -fx-font-size: 15;
+}
+
+JFXButton.btTaiHinh{
+    -fx-background-color: #0033cc;
+}
+
+HBox.hboxCuoi{
+    -fx-alignment: CENTER_RIGHT;
+    -fx-spacing: 10;
+}

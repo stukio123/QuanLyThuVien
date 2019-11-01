@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="666.0" prefWidth="1010.0" stylesheets="@styleDocGia.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox prefHeight="107.0" prefWidth="1010.0" styleClass="hboxDau">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="QUẢN LÝ ĐỘC GIẢ">
+               <HBox.margin>
+                  <Insets left="10.0" right="30.0" />
+               </HBox.margin>
+            </Text>
+            <JFXTextField prefHeight="25.0" prefWidth="371.0">
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </JFXTextField>
+            <JFXButton contentDisplay="CENTER" prefHeight="20.0" prefWidth="35.0" text=" ">
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/search-3-32.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+            <JFXComboBox prefHeight="25.0" prefWidth="191.0">
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </JFXComboBox>
+         </children>
+      </HBox>
+      <HBox prefHeight="63.0" prefWidth="990.0" styleClass="hboxCapNhat" stylesheets="@styleSach.css">
+         <children>
+            <JFXButton graphicTextGap="10.0" prefWidth="120.0" text="Xem">
+               <styleClass>
+                  <String fx:value="btCapNhap" />
+                  <String fx:value="Xem" />
+               </styleClass>
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/eye-3-32.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+            <JFXButton prefWidth="120.0" text="Thêm">
+               <styleClass>
+                  <String fx:value="btCapNhap" />
+                  <String fx:value="Them" />
+               </styleClass>
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/plus-5-32.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+            <JFXButton prefWidth="120.0" text="Cập Nhập">
+               <styleClass>
+                  <String fx:value="btCapNhap" />
+                  <String fx:value="Sua" />
+               </styleClass>
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/settings-24-32.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+            <JFXButton prefWidth="120.0" text="Xóa">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+               <styleClass>
+                  <String fx:value="btCapNhap" />
+                  <String fx:value="Xoa" />
+               </styleClass>
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/delete-24.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+         </children>
+         <VBox.margin>
+            <Insets bottom="5.0" right="5.0" top="10.0" />
+         </VBox.margin>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="462.0" prefWidth="1010.0">
+         <children>
+            <VBox prefHeight="435.0" prefWidth="220.0">
+               <children>
+                  <JFXButton prefHeight="70.0" prefWidth="190.0" styleClass="btChucNang" text="Quản Lý Sách">
+                     <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </JFXButton>
+                  <JFXButton prefHeight="70.0" prefWidth="190.0" styleClass="btChucNang" text="Quản Lý Độc Giả">
+                     <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </JFXButton>
+                  <JFXButton prefHeight="70.0" prefWidth="190.0" styleClass="btChucNang" text="Quản Lý Mượn Sách">
+                     <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </JFXButton>
+                  <JFXButton prefHeight="70.0" prefWidth="190.0" styleClass="btChucNang" text="Quản Lý Trả Sách">
+                     <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </JFXButton>
+                  <JFXButton prefHeight="70.0" prefWidth="190.0" styleClass="btChucNang" text="Quản Lý Nhân Viên">
+                     <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </JFXButton>
+                  <JFXButton prefHeight="70.0" prefWidth="190.0" styleClass="btChucNang" text="Thông Kê">
+                     <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </JFXButton>
+               </children>
+            </VBox>
+            <TableView fx:id="tbvSach" accessibleRole="LIST_VIEW" prefHeight="438.0" prefWidth="828.0">
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin>
+            </TableView>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <JFXButton text="Quay Lại">
+               <graphic>
+                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/logout-32.png" />
+                     </image>
+                  </ImageView>
+               </graphic></JFXButton>
+         </children>
+      </HBox>
+   </children>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+</VBox>

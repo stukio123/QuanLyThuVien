@@ -1,0 +1,68 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Oct 31, 2019, 1:06:34 PM
+    Author     : Tran Nguyen Anh
+*/
+
+Text{
+    -fx-fill: white;
+    -fx-font-size: 38;
+    -fx-font-family: Tahoma;
+    
+}
+
+
+HBox.hboxDau{
+    -fx-background-color: #0033cc;
+}
+/*
+VBox{
+    -fx-background-color: navy;
+}*/
+
+
+JFXTextField{
+    -fx-background-color: white;
+    -fx-padding: 10 10 10 10;   
+}
+
+HBox.hboxGiua{
+    -fx-padding: 10 10 10 10;
+}
+HBox.hboxCuoi{
+}
+
+JFXButton{
+    -fx-background-color: limegreen;
+    -fx-text-fill: whitesmoke   ;
+    -fx-font-size: 15;
+}
+
+
+JFXButton.btSach{
+    -fx-background-color: #cc00cc;
+}
+
+JFXButton.btDocGia{
+    -fx-background-color: #0066ff;
+}
+
+JFXButton.btMuon{
+    -fx-background-color: #66cc00;
+}
+
+JFXButton.btTra{
+    -fx-background-color: orange;
+}
+
+JFXButton.btThongKe{
+    -fx-background-color: orangered;
+}
+
+JFXButton.btNhanVien{
+    -fx-background-color: silver;
+}

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="308.0" prefWidth="501.0" stylesheets="@styleDangNhap.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="quanlythuvien2.FXMLDangNhapController">
+   <children>
+      <VBox alignment="CENTER" layoutX="175.0" layoutY="20.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="QUẢN LÝ THƯ VIỆN">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin></Text>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label contentDisplay="RIGHT" text="Tài Khoản">
+                     <HBox.margin>
+                        <Insets right="10.0" top="15.0" />
+                     </HBox.margin></Label>
+                  <JFXTextField fx:id="txtTaiKhoan" prefHeight="25.0" prefWidth="267.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label text="Mật Khẩu">
+                     <HBox.margin>
+                        <Insets right="10.0" top="15.0" />
+                     </HBox.margin></Label>
+                  <JFXPasswordField fx:id="txtMatKhau" prefHeight="25.0" prefWidth="267.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <JFXRadioButton fx:id="rdQuanLy" text="Quản Lý">
+                     <HBox.margin>
+                        <Insets right="20.0" />
+                     </HBox.margin>
+                     <toggleGroup>
+                        <ToggleGroup fx:id="Choose" />
+                     </toggleGroup></JFXRadioButton>
+                  <JFXRadioButton fx:id="rdNhanVien" text="Nhân Viên" toggleGroup="$Choose">
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin></JFXRadioButton>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="15.0" prefWidth="458.0">
+               <children>
+                  <JFXButton fx:id="btDangNhap" onAction="#btDangNhapHandler" text="Đăng Nhập">
+                     <HBox.margin>
+                        <Insets right="20.0" />
+                     </HBox.margin></JFXButton>
+                  <JFXButton fx:id="btThoat" onAction="#btThoatHandler" text="   Thoát   ">
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin></JFXButton>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="388.0" prefWidth="644.0" styleClass="Chinh" stylesheets="@styleThemSach.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="quanlythuvien2.FXMLThemDocGiaController">
+   <children>
+      <HBox styleClass="hboxDau">
+         <children>
+            <ImageView fitHeight="68.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="THÊM THÔNG TIN ĐỘC GIẢ" />
+         </children>
+      </HBox>
+      <HBox prefHeight="172.0" prefWidth="600.0">
+         <children>
+            <StackPane prefHeight="150.0" prefWidth="200.0">
+               <children>
+                  <JFXButton styleClass="btTaiHinh" text="Tải Hình" />
+                  <ImageView fitHeight="216.0" fitWidth="225.0" pickOnBounds="true" preserveRatio="true" visible="false" />
+               </children>
+            </StackPane>
+            <VBox prefHeight="216.0" prefWidth="396.0" styleClass="vboxThongTin">
+               <children>
+                  <JFXTextField fx:id="txtMaDG" promptText="Mã Độc Giả" />
+                  <JFXTextField fx:id="txtTenDG" promptText="Họ Tên Độc Giả" />
+                  <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="396.0" styleClass="hboxThongTin">
+                     <children>
+                        <JFXDatePicker fx:id="txtNamSinh" prefHeight="25.0" prefWidth="231.0" promptText="Năm Sinh" />
+                        <JFXRadioButton text="Nam" />
+                        <JFXRadioButton text="Nữ" />
+                     </children>
+                  </HBox>
+                  <JFXTextField fx:id="txtDiaChi" prefHeight="25.0" prefWidth="246.0" promptText="Địa Chỉ" />
+                  <JFXTextField fx:id="txtSoThe" promptText="Số Thẻ" />
+               </children>
+            </VBox>
+         </children>
+         <VBox.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </VBox.margin></HBox>
+      <HBox prefHeight="100.0" prefWidth="200.0" styleClass="hboxCuoi">
+         <children>
+            <JFXButton prefWidth="70.0" styleClass="btThem" text="Thêm" />
+            <JFXButton prefWidth="70.0" styleClass="btHuy" text="Hủy" />
+         </children>
+      </HBox>
+   </children>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+</VBox>
