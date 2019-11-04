@@ -11,7 +11,6 @@ import java.net.URL;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -25,13 +24,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import javax.swing.JOptionPane;
-import quanlythuvien2.models.DocGia;
 import quanlythuvien2.models.Sach;
 
 public class FXMLSachController implements Initializable {
@@ -94,7 +93,7 @@ public class FXMLSachController implements Initializable {
     private String delMaSach = "";
     private String chucNang ="";
     
-    ObservableList<String> listLoai = FXCollections.observableArrayList("Mã sách","Tên sách","Tên tác giả","Nhà xuất bản");
+    ObservableList<String> listLoai = FXCollections.observableArrayList("Mã sách","Tên sách","Tên tác giả","Thể loại","Nhà xuất bản");
     
     
     FXMLTrangChinhController  s = new FXMLTrangChinhController();
@@ -221,9 +220,11 @@ public class FXMLSachController implements Initializable {
                 case "Thể loại":
                     sql = "theloai";
                     loadSach(getSach(sql,this.txtTim.getText()));
+                    break;
                 case "Nhà xuất bản":
                     sql = "nhaxuatban";
                     loadSach(getSach(sql,this.txtTim.getText()));
+                    break;
                 default:
                     loadSach(getSach());
                     break;
@@ -246,9 +247,18 @@ public class FXMLSachController implements Initializable {
     @FXML
     public void XoaSach(ActionEvent Event) throws SQLException{
         System.out.println(delMaSach);
-        delSach(delMaSach);
-        btnSua.setDisable(true);
-        btnXoa.setDisable(true);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setContentText("Bạn có muốn xóa sách có mã sách :" +delMaSach+" không ?");
+        alert.showAndWait().ifPresent(type -> {
+        if (type == ButtonType.OK) {
+            try {
+                delSach(delMaSach);
+            } catch (SQLException ex) {
+                Logger.getLogger(FXMLSachController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            btnXoa.setDisable(true);
+        } 
+        });
         loadSach(getSach());
     }
     

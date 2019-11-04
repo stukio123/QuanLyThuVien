@@ -110,12 +110,12 @@ public class FXMLChinhSuaSachController implements Initializable {
         Integer.parseInt(this.txtSoLuong.getText()));
         if(JdbcSach.updateSach(s)) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setContentText("Thêm Thành Công !!");
+            alert.setContentText("Lưu Thành Công !!");
             alert.show();
         }else{
             
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Thêm  thất bại");
+            alert.setContentText("Lưu thất bại");
             alert.show();
         }
         loadSach(getSach());

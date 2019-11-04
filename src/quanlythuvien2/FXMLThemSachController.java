@@ -33,19 +33,27 @@ public class FXMLThemSachController implements Initializable {
     @FXML
     private JFXButton btHuy;
     
-    public boolean btThemHandler(ActionEvent event) throws SQLException, IOException{
-        boolean pass = false;
+    public void btThemHandler(ActionEvent event) throws SQLException, IOException{
         try {
             Sach s = new Sach(this.txtMaSach.getText(),this.txtTenSach.getText(),
                     this.txtTacGia.getText(),this.txtTheLoai.getText(),
                     this.txtNxb.getText(),Integer.parseInt(this.txtSoLuong.getText()));
             JdbcSach.addSach(s);
-            return pass = true;
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText("Thêm Thành Công !!");
+            alert.show();
+            txtMaSach.clear();
+            txtTenSach.clear();
+            txtTacGia.clear();
+            txtTheLoai.clear();
+            txtNxb.clear();
+            txtSoLuong.clear();
+            
+            
         } catch (SQLException ex) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setContentText("Thêm  thất bại, lý do: " + ex.getMessage());
             alert.show();
-            return pass;
         }
     }
     
