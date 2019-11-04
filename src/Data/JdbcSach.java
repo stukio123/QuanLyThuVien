@@ -7,9 +7,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import quanlythuvien2.models.Sach;
 
 public class JdbcSach {
+    public static PreparedStatement ps;
 
     public static List<Sach> getSach() throws SQLException {
         Connection conn = Jdbc.getConn();
@@ -41,6 +44,23 @@ public class JdbcSach {
             listSach.add(s);
         }
         return listSach;
+    }
+    
+    public static Sach getSach(String MaSach) throws SQLException {
+        Connection conn = Jdbc.getConn();
+        String sql = "SELECT * FROM SACH WHERE masach = '"+MaSach+"'";       
+        Statement stm = conn.createStatement();
+        ResultSet rs = stm.executeQuery(sql);
+        Sach s = null;
+//        Sach listSach = new Sach();
+     
+        while (rs.next()) {
+                s = new Sach(rs.getString("masach"), 
+                    rs.getString("tensach"), rs.getString("tacgia"),rs.getString("theloai"),rs.getString("nhaxuatban"),rs.getInt("soluong"));
+//            listSach.add(s);
+        }
+        
+        return s;
     }
 
     public static void addSach(Sach a) throws SQLException{
@@ -74,4 +94,21 @@ public class JdbcSach {
 //       for(Sach a: getSach())
 //            System.out.println(a.getTenSach());
 //    }
+    public static boolean updateSach(Sach a){
+        try {
+            ps = Jdbc.getConn().prepareStatement("UPDATE sach SET  tensach = ?, tacgia = ?,"
+                    + "theloai = ?, nhaxuatban = ?, soluong = ? where masach = ?");
+            ps.setString(6, a.getMaSach());
+            
+            ps.setString(1, a.getTenSach());
+            ps.setString(2, a.getTacGia());
+            ps.setString(3, a.getTheLoai());
+            ps.setString(4, a.getNxb());
+            ps.setInt(5, a.getSoLuong());
+            return ps.executeUpdate() >0;
+        } catch (SQLException ex) {
+            Logger.getLogger(JdbcSach.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            return false;
+    }
 }

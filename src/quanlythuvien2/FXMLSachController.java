@@ -1,5 +1,6 @@
 package quanlythuvien2;
 
+import Data.JdbcDocGia;
 import static Data.JdbcSach.delSach;
 import static Data.JdbcSach.getSach;
 import com.jfoenix.controls.JFXButton;
@@ -7,7 +8,10 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -26,6 +30,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javax.swing.JOptionPane;
+import quanlythuvien2.models.DocGia;
 import quanlythuvien2.models.Sach;
 
 public class FXMLSachController implements Initializable {
@@ -53,19 +59,109 @@ public class FXMLSachController implements Initializable {
     @FXML
     private JFXButton btnXoa;
     
+    @FXML
+    private JFXButton btnQLNhanVien;
+    @FXML
+    private JFXButton btnQLSach;
+    @FXML
+    private JFXButton btnQLDocGia;
+    @FXML
+    private JFXButton btnQLMuonSach;
+    @FXML
+    private JFXButton btnQLTraSach;
+    @FXML
+    private JFXButton btnQLThongKe;
+    
+   
+    
+    
+    @FXML
+    private TableView tbvDG;
+    @FXML
+    private TableColumn<Sach, String> tbcMaDG;
+    @FXML
+    private TableColumn<Sach, String> tbcTenDG;
+     @FXML
+    private TableColumn<Sach, String> tbcGioiTinh;
+     @FXML
+    private TableColumn<Sach, Date> tbcNgaySinh;
+     @FXML
+    private TableColumn<Sach, String> tbcDiaChi;
+     @FXML
+    private TableColumn<Sach, Integer> tbcMaThe;
+    
+    
     private String delMaSach = "";
+    private String chucNang ="";
     
     ObservableList<String> listLoai = FXCollections.observableArrayList("Mã sách","Tên sách","Tên tác giả","Nhà xuất bản");
     
-
+    
+    FXMLTrangChinhController  s = new FXMLTrangChinhController();
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        try {
-            this.loadSach(getSach());
-        } catch (SQLException ex) {
-            Logger.getLogger(FXMLSachController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        cbLoai.setItems(listLoai);
+        
+
+        
+        
+//        JOptionPane.showMessageDialog(null, s.tenChucNang , "Thông báo", 1);
+
+        this.btnQLSach.setOnMouseClicked(et->{
+            this.tbvSach.setVisible(true);
+            this.tbvDG.setVisible(false);
+            this.chucNang = "Sach";
+            try {
+                 this.loadSach(getSach());
+             } catch (SQLException ex) {
+                 Logger.getLogger(FXMLSachController.class.getName()).log(Level.SEVERE, null, ex);
+             }
+             cbLoai.setItems(listLoai);
+        });
+        
+        this.btnQLDocGia.setOnMouseClicked((MouseEvent et)->{
+            this.tbvSach.setVisible(false);
+            this.tbvDG.setVisible(true);
+            this.chucNang = "DocGia";
+
+            
+            
+            try {
+                this.loadDG(JdbcDocGia.getDG());
+            } catch (SQLException ex) {
+                Logger.getLogger(FXMLSachController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ParseException ex) {
+                Logger.getLogger(FXMLSachController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+       
+        });
+            
+           
+      
+        
+
+        
+    }
+    
+    
+    public void loadDG(List a) throws SQLException{
+
+
+        tbcMaDG.setCellValueFactory(new PropertyValueFactory<>("maDG"));
+
+        tbcTenDG.setCellValueFactory(new PropertyValueFactory<>("tenDG"));
+
+        tbcGioiTinh.setCellValueFactory(new PropertyValueFactory<>("gioiTinh"));
+
+        tbcNgaySinh.setCellValueFactory(new PropertyValueFactory<>("namSinh"));
+        
+        tbcDiaChi.setCellValueFactory(new PropertyValueFactory<>("diaChi"));
+        
+        tbcMaThe.setCellValueFactory(new PropertyValueFactory<>("soThe"));
+
+        this.tbvDG.setItems(FXCollections.observableArrayList(a));
+     
     }
     
     public void loadSach(List a) throws SQLException{
@@ -88,7 +184,7 @@ public class FXMLSachController implements Initializable {
     }
     
     public void btThemHandler(ActionEvent event) throws IOException, SQLException{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLThemSach.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLThem" + this.chucNang +".fxml"));
         Stage stage = new Stage();
         Parent rootl = (Parent) loader.load();
         Stage stageDangNhap = new Stage();
@@ -167,6 +263,10 @@ public class FXMLSachController implements Initializable {
         
     }
     
+    public void btRefesh(ActionEvent event) throws SQLException{
+        loadSach(getSach());
+    }
+    
     public void btChinhSuaHandler(ActionEvent event) throws IOException{
         
         FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLChinhSuaSach.fxml"));
@@ -174,9 +274,9 @@ public class FXMLSachController implements Initializable {
         Parent rootl = (Parent) loader.load();
         Stage stageDangNhap = new Stage();
         Scene sceneDN =  new Scene(rootl);
-        FXMLChinhSuaSachController controller = loader.getController();
-        Sach selected = tbvSach.getSelectionModel().getSelectedItem();
-        controller.setSach(selected);
+//        FXMLChinhSuaSachController controller = loader.getController();
+//        Sach selected = tbvSach.getSelectionModel().getSelectedItem();
+//        controller.setSach(selected);
         stageDangNhap.setScene(sceneDN);        
         stageDangNhap.show();
         

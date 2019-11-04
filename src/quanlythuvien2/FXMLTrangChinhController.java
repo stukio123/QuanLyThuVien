@@ -17,6 +17,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javax.swing.JOptionPane;
 
 /**
  * FXML Controller class
@@ -29,29 +30,22 @@ public class FXMLTrangChinhController implements Initializable {
     
     @FXML
     private JFXButton btQLDocGia;
-    public void btQLDocGiaHandler(ActionEvent event){
-        
-    }
     @FXML
     private JFXButton btQLMuonSach;
-    public void btQLMuonSachHandler(ActionEvent event){
-        
-    }
+    
     @FXML
     private JFXButton btQLTraSach;
-    public void btQLTraSachHandler(ActionEvent event){
-        
-    }
+    
     @FXML
     private JFXButton btQLThongKe;
-    public void btQLThongKeHandler(ActionEvent event){
-        
-    }
+   
     @FXML
     private JFXButton btQLNhanVien;
-    public void btQLNhanVienHandler(ActionEvent event){
-        
-    }
+    
+    
+    public String tenChucNang = "QLSach"; 
+    
+
     
     
     
@@ -63,6 +57,12 @@ public class FXMLTrangChinhController implements Initializable {
         Scene scene = new Scene(ChucNang);
         stage.setScene(scene);
         stage.show();
+        
+       btQLSach.setOnMouseClicked(et -> {
+       
+           JOptionPane.showMessageDialog(null, this.tenChucNang, "Thông báo", 1);
+       });
+       
     }
     
     @FXML
@@ -85,6 +85,31 @@ public class FXMLTrangChinhController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        
+//        this.btQLSach.setOnMouseClicked(et->{
+//            this.tenChucNang = "Quản Lý Sách";
+//        });
+//        
+//        this.btQLDocGia.setOnMouseClicked(et->{
+//            this.tenChucNang = "Quản Lý Độc Giả";
+//        });
+//        
+//        this.btQLMuonSach.setOnMouseClicked(et->{
+//            this.tenChucNang = "Quản Lý Mượn Sách";
+//        });
+//        
+//        this.btQLTraSach.setOnMouseClicked(et->{
+//            this.tenChucNang = "Quản Lý Trả Sách";
+//        });
+//        
+//        this.btQLThongKe.setOnMouseClicked(et->{
+//            this.tenChucNang = "Thống Kê";
+//        });
+//        this.btQLNhanVien.setOnMouseClicked(et->{
+//            this.tenChucNang = "Quản Lý Nhân Viên";
+//        });
+//        
+       
     }    
     
 }

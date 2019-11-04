@@ -10,6 +10,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
@@ -49,7 +50,7 @@
       </HBox>
       <HBox prefHeight="63.0" prefWidth="990.0" styleClass="hboxCapNhat" stylesheets="@styleSach.css">
          <children>
-            <JFXButton graphicTextGap="10.0" prefWidth="120.0" text="Xem">
+            <JFXButton graphicTextGap="10.0" onAction="#btRefesh" prefWidth="120.0" text="Xem">
                <styleClass>
                   <String fx:value="btCapNhap" />
                   <String fx:value="Xem" />
@@ -75,7 +76,7 @@
                   </ImageView>
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="btnSua" disable="true" graphicTextGap="10.0" onAction="#btChinhSuaHandler" prefWidth="120.0" text="Cập Nhập">
+            <JFXButton fx:id="btnSua" graphicTextGap="10.0" onAction="#btChinhSuaHandler" prefWidth="120.0" text="Cập Nhập">
                <styleClass>
                   <String fx:value="btCapNhap" />
                   <String fx:value="Sua" />
@@ -112,7 +113,7 @@
          <children>
             <VBox prefHeight="455.0" prefWidth="218.0">
                <children>
-                  <JFXButton prefHeight="70.0" prefWidth="190.0" styleClass="btChucNang" text="Quản Lý Sách">
+                  <JFXButton fx:id="btnQLSach" prefHeight="70.0" prefWidth="190.0" styleClass="btChucNang" text="Quản Lý Sách">
                      <padding>
                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                      </padding>
@@ -120,7 +121,7 @@
                         <Insets left="5.0" right="5.0" top="5.0" />
                      </VBox.margin>
                   </JFXButton>
-                  <JFXButton prefHeight="70.0" prefWidth="190.0" styleClass="btChucNang" text="Quản Lý Độc Giả">
+                  <JFXButton fx:id="btnQLDocGia" prefHeight="70.0" prefWidth="190.0" styleClass="btChucNang" text="Quản Lý Độc Giả">
                      <padding>
                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                      </padding>
@@ -128,7 +129,7 @@
                         <Insets left="5.0" right="5.0" top="5.0" />
                      </VBox.margin>
                   </JFXButton>
-                  <JFXButton prefHeight="70.0" prefWidth="190.0" styleClass="btChucNang" text="Quản Lý Mượn Sách">
+                  <JFXButton fx:id="btnQLMuonSach" prefHeight="70.0" prefWidth="190.0" styleClass="btChucNang" text="Quản Lý Mượn Sách">
                      <padding>
                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                      </padding>
@@ -136,7 +137,7 @@
                         <Insets left="5.0" right="5.0" top="5.0" />
                      </VBox.margin>
                   </JFXButton>
-                  <JFXButton prefHeight="70.0" prefWidth="190.0" styleClass="btChucNang" text="Quản Lý Trả Sách">
+                  <JFXButton fx:id="btnQLTraSach" prefHeight="70.0" prefWidth="190.0" styleClass="btChucNang" text="Quản Lý Trả Sách">
                      <padding>
                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                      </padding>
@@ -144,7 +145,7 @@
                         <Insets left="5.0" right="5.0" top="5.0" />
                      </VBox.margin>
                   </JFXButton>
-                  <JFXButton prefHeight="70.0" prefWidth="190.0" styleClass="btChucNang" text="Quản Lý Nhân Viên">
+                  <JFXButton fx:id="btnQLNhanVien" prefHeight="70.0" prefWidth="190.0" styleClass="btChucNang" text="Quản Lý Nhân Viên">
                      <padding>
                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                      </padding>
@@ -152,7 +153,7 @@
                         <Insets left="5.0" right="5.0" top="5.0" />
                      </VBox.margin>
                   </JFXButton>
-                  <JFXButton prefHeight="70.0" prefWidth="190.0" styleClass="btChucNang" text="Thông Kê">
+                  <JFXButton fx:id="btnQLThongKe" prefHeight="70.0" prefWidth="190.0" styleClass="btChucNang" text="Thông Kê">
                      <padding>
                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                      </padding>
@@ -162,16 +163,30 @@
                   </JFXButton>
                </children>
             </VBox>
-            <TableView fx:id="tbvSach" onMouseClicked="#ChonSach" prefHeight="455.0" prefWidth="864.0">
-              <columns>
-                <TableColumn fx:id="tbcMaSach" prefWidth="75.0" text="Mã Sách" />
-                <TableColumn fx:id="tbcTenSach" prefWidth="226.0" text="Tên Sách" />
-                  <TableColumn fx:id="tbcTacGia" prefWidth="145.0" text="Tác Giả" />
-                  <TableColumn fx:id="tbcTheLoai" prefWidth="128.0" text="Thể Loại" />
-                  <TableColumn fx:id="tbcNxb" prefWidth="193.0" text="Nhà Xuất Bản" />
-                  <TableColumn fx:id="tbcSoLuong" prefWidth="96.0" text="Số Lượng" />
-              </columns>
-            </TableView>
+            <StackPane prefHeight="455.0" prefWidth="871.0">
+               <children>
+                  <TableView fx:id="tbvSach" onMouseClicked="#ChonSach" prefHeight="455.0" prefWidth="307.0" visible="false">
+                    <columns>
+                      <TableColumn fx:id="tbcMaSach" prefWidth="75.0" text="Mã Sách" />
+                      <TableColumn fx:id="tbcTenSach" prefWidth="226.0" text="Tên Sách" />
+                        <TableColumn fx:id="tbcTacGia" prefWidth="145.0" text="Tác Giả" />
+                        <TableColumn fx:id="tbcTheLoai" prefWidth="128.0" text="Thể Loại" />
+                        <TableColumn fx:id="tbcNxb" prefWidth="193.0" text="Nhà Xuất Bản" />
+                        <TableColumn fx:id="tbcSoLuong" prefWidth="96.0" text="Số Lượng" />
+                    </columns>
+                  </TableView>
+                  <TableView fx:id="tbvDG" prefHeight="200.0" prefWidth="200.0" visible="false">
+                    <columns>
+                      <TableColumn fx:id="tbcMaDG" prefWidth="75.0" text="Mã ĐG" />
+                      <TableColumn fx:id="tbcTenDG" prefWidth="75.0" text="Tên DG" />
+                        <TableColumn fx:id="tbcGioiTinh" prefWidth="75.0" text="Giới Tính" />
+                        <TableColumn fx:id="tbcNgaySinh" prefWidth="75.0" text="Ngày Sinh" />
+                        <TableColumn fx:id="tbcDiaChi" prefWidth="75.0" text="Địa Chỉ" />
+                        <TableColumn fx:id="tbcMaThe" prefWidth="75.0" text="Số Thẻ TV" />
+                    </columns>
+                  </TableView>
+               </children>
+            </StackPane>
          </children>
       </HBox>
       <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">

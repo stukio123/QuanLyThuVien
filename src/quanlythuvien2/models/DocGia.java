@@ -19,16 +19,20 @@ public class DocGia {
     private Date namSinh;
     private boolean gioiTinh;
     private String diaChi;
-    private TheThuVien the;
-    
-    public DocGia(String ma,String ten,String nam,boolean gt,String diachi,int sothe) throws ParseException{
+    private int soThe;
+    public DocGia(String ma,String ten,boolean gt,Date nam,String diachi,int sothe) throws ParseException{
         this.maDG = ma;
         this.tenDG = ten;
-        SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
-        this.namSinh = (Date) f.parse(nam);
+       
+        this.namSinh = nam;
         this.gioiTinh = gt;
         this.diaChi = diachi;
-        
+        this.soThe = sothe;
+    }
+    public DocGia(String ma,String ten,int the){
+        this.maDG = ma;
+        this.tenDG = ten;
+        this.soThe = the;
     }
 
     /**
@@ -99,5 +103,19 @@ public class DocGia {
      */
     public void setDiaChi(String diaChi) {
         this.diaChi = diaChi;
+    }
+
+    /**
+     * @return the soThe
+     */
+    public int getSoThe() {
+        return soThe;
+    }
+
+    /**
+     * @param soThe the soThe to set
+     */
+    public void setSoThe(int soThe) {
+        this.soThe = soThe;
     }
 }

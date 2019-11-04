@@ -17,13 +17,18 @@ public class TheThuVien {
     private int soThe;
     private Date ngayBatDau;
     private Date ngayKetThuc;
-
+    public TheThuVien(int sothe){
+        this.soThe=sothe;
+    }
+    public TheThuVien(){
+    }
     public TheThuVien(int so,String ngaybd,String ngaykt) throws ParseException{
         this.soThe = so;
         SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyy");
         this.ngayBatDau = (Date) f.parse(ngaybd);
         this.ngayKetThuc = (Date) f.parse(ngaykt);
     }
+    
     
     /**
      * @return the soThe

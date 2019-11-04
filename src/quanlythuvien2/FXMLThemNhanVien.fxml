@@ -13,12 +13,12 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="388.0" prefWidth="644.0" styleClass="Chinh" stylesheets="@styleThemSach.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="quanlythuvien2.FXMLThemDocGiaController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="388.0" prefWidth="644.0" styleClass="Chinh" stylesheets="@styleThemSach.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="quanlythuvien2.FXMLThemNhanVienController">
    <children>
       <HBox styleClass="hboxDau">
          <children>
             <ImageView fitHeight="68.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="THÊM THÔNG TIN ĐỘC GIẢ" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="THÊM THÔNG TIN NHÂN VIÊN" />
          </children>
       </HBox>
       <HBox prefHeight="172.0" prefWidth="600.0">
@@ -31,8 +31,7 @@
             </StackPane>
             <VBox prefHeight="216.0" prefWidth="396.0" styleClass="vboxThongTin">
                <children>
-                  <JFXTextField fx:id="txtMaDG" promptText="Mã Độc Giả" />
-                  <JFXTextField fx:id="txtTenDG" promptText="Họ Tên Độc Giả" />
+                  <JFXTextField fx:id="txtMaDG" promptText="Họ Tên Nhân Viên" />
                   <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="396.0" styleClass="hboxThongTin">
                      <children>
                         <JFXDatePicker fx:id="txtNamSinh" prefHeight="25.0" prefWidth="231.0" promptText="Năm Sinh" />
@@ -44,7 +43,7 @@
                      </children>
                   </HBox>
                   <JFXTextField fx:id="txtDiaChi" prefHeight="25.0" prefWidth="246.0" promptText="Địa Chỉ" />
-                  <JFXComboBox fx:id="cbSoThe" prefHeight="31.0" prefWidth="680.0" promptText="Số Thẻ" />
+                  <JFXComboBox fx:id="cbSoThe" prefHeight="31.0" prefWidth="680.0" promptText="Mã tài khoản" />
                </children>
             </VBox>
          </children>
