@@ -53,8 +53,8 @@
          </VBox.margin></HBox>
       <HBox prefHeight="100.0" prefWidth="200.0" styleClass="hboxCuoi">
          <children>
-            <JFXButton onAction="#btThemHandler" prefWidth="70.0" styleClass="btThem" text="Thêm" />
-            <JFXButton prefWidth="70.0" styleClass="btHuy" text="Hủy" />
+            <JFXButton fx:id="btThem" onAction="#btThemHandler" prefWidth="70.0" styleClass="btThem" text="Thêm" />
+            <JFXButton fx:id="btHuy" onAction="#btHuyHandler" prefWidth="70.0" styleClass="btHuy" text="Hủy" />
          </children>
       </HBox>
    </children>

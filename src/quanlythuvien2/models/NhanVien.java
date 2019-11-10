@@ -13,13 +13,15 @@ import java.sql.Date;
  */
 public class NhanVien {
    private String tenNV;
-   private boolean gioiTinh;
+   private String gioiTinh;
    private Date ngaySinh;
    private String diaChi;
    private int maTK;
 
-   public NhanVien(String nv,boolean gt,Date ns,String dc,int matk){
+   private int maNV;
+    public NhanVien(int ma,String nv,String gt,Date ns,String dc,int matk){
        this.tenNV = nv;
+       this.maNV = ma;
        this.gioiTinh = gt;
        this.ngaySinh = ns;
        this.diaChi = dc;
@@ -37,20 +39,6 @@ public class NhanVien {
      */
     public void setTenNV(String tenNV) {
         this.tenNV = tenNV;
-    }
-
-    /**
-     * @return the gioiTinh
-     */
-    public boolean isGioiTinh() {
-        return gioiTinh;
-    }
-
-    /**
-     * @param gioiTinh the gioiTinh to set
-     */
-    public void setGioiTinh(boolean gioiTinh) {
-        this.gioiTinh = gioiTinh;
     }
 
     /**
@@ -93,6 +81,34 @@ public class NhanVien {
      */
     public void setMaTK(int maTK) {
         this.maTK = maTK;
+    }
+
+    /**
+     * @return the maNV
+     */
+    public int getMaNV() {
+        return maNV;
+    }
+
+    /**
+     * @param maNV the maNV to set
+     */
+    public void setMaNV(int maNV) {
+        this.maNV = maNV;
+    }
+
+    /**
+     * @return the gioiTinh
+     */
+    public String getGioiTinh() {
+        return gioiTinh;
+    }
+
+    /**
+     * @param gioiTinh the gioiTinh to set
+     */
+    public void setGioiTinh(String gioiTinh) {
+        this.gioiTinh = gioiTinh;
     }
    
 }

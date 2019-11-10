@@ -60,7 +60,8 @@ JFXButton.btCapNhap.Sua{
 
 
 JFXTextField{
-    -fx-background-color: white;
+    -fx-text-fill: #ffffff;
+    
 }
 
 TableColumn{
@@ -76,4 +77,14 @@ JFXButton{
 
 JFXComboBox{
     -fx-background-color: white;
+}
+
+VBox.VboxMuonSach{
+    -fx-alignment: CENTER;
+    -fx-spacing: 15;
+    -fx-background-color: #006699;
+   
+}
+HBox{
+    -fx-alignment: CENTER;
 }

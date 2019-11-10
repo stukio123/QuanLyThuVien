@@ -14,13 +14,13 @@ import java.text.SimpleDateFormat;
  * @author Admin
  */
 public class DocGia {
-    private String maDG;
+    private int maDG;
     private String tenDG;
     private Date namSinh;
-    private boolean gioiTinh;
+    private String gioiTinh;
     private String diaChi;
     private int soThe;
-    public DocGia(String ma,String ten,boolean gt,Date nam,String diachi,int sothe) throws ParseException{
+    public DocGia(int ma,String ten,String gt,Date nam,String diachi,int sothe) throws ParseException{
         this.maDG = ma;
         this.tenDG = ten;
        
@@ -29,7 +29,7 @@ public class DocGia {
         this.diaChi = diachi;
         this.soThe = sothe;
     }
-    public DocGia(String ma,String ten,int the){
+    public DocGia(int ma,String ten,int the){
         this.maDG = ma;
         this.tenDG = ten;
         this.soThe = the;
@@ -38,14 +38,14 @@ public class DocGia {
     /**
      * @return the maDG
      */
-    public String getMaDG() {
+    public int getMaDG() {
         return maDG;
     }
 
     /**
      * @param maDG the maDG to set
      */
-    public void setMaDG(String maDG) {
+    public void setMaDG(int maDG) {
         this.maDG = maDG;
     }
 
@@ -80,14 +80,14 @@ public class DocGia {
     /**
      * @return the gioiTinh
      */
-    public boolean isGioiTinh() {
+    public String isGioiTinh() {
         return gioiTinh;
     }
 
     /**
      * @param gioiTinh the gioiTinh to set
      */
-    public void setGioiTinh(boolean gioiTinh) {
+    public void setGioiTinh(String gioiTinh) {
         this.gioiTinh = gioiTinh;
     }
 

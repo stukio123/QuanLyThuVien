@@ -58,10 +58,7 @@ public class FXMLTrangChinhController implements Initializable {
         stage.setScene(scene);
         stage.show();
         
-       btQLSach.setOnMouseClicked(et -> {
-       
-           JOptionPane.showMessageDialog(null, this.tenChucNang, "Thông báo", 1);
-       });
+     
        
     }
     

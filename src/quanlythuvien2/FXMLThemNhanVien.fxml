@@ -31,7 +31,8 @@
             </StackPane>
             <VBox prefHeight="216.0" prefWidth="396.0" styleClass="vboxThongTin">
                <children>
-                  <JFXTextField fx:id="txtMaDG" promptText="Họ Tên Nhân Viên" />
+                  <JFXTextField fx:id="txtMaNV" />
+                  <JFXTextField fx:id="txtTenNV" promptText="Họ Tên Nhân Viên" />
                   <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="396.0" styleClass="hboxThongTin">
                      <children>
                         <JFXDatePicker fx:id="txtNamSinh" prefHeight="25.0" prefWidth="231.0" promptText="Năm Sinh" />
@@ -43,7 +44,7 @@
                      </children>
                   </HBox>
                   <JFXTextField fx:id="txtDiaChi" prefHeight="25.0" prefWidth="246.0" promptText="Địa Chỉ" />
-                  <JFXComboBox fx:id="cbSoThe" prefHeight="31.0" prefWidth="680.0" promptText="Mã tài khoản" />
+                  <JFXComboBox fx:id="cbMaTK" prefHeight="31.0" prefWidth="680.0" promptText="tên tài khoản" />
                </children>
             </VBox>
          </children>
@@ -52,8 +53,8 @@
          </VBox.margin></HBox>
       <HBox prefHeight="100.0" prefWidth="200.0" styleClass="hboxCuoi">
          <children>
-            <JFXButton onAction="#btThemHandler" prefWidth="70.0" styleClass="btThem" text="Thêm" />
-            <JFXButton prefWidth="70.0" styleClass="btHuy" text="Hủy" />
+            <JFXButton fx:id="btThem" onAction="#btThemHandler" prefWidth="70.0" styleClass="btThem" text="Thêm" />
+            <JFXButton fx:id="btHuy" onAction="#btHuyHandler" prefWidth="70.0" styleClass="btHuy" text="Hủy" />
          </children>
       </HBox>
    </children>

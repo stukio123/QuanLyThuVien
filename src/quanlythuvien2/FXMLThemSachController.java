@@ -34,13 +34,14 @@ public class FXMLThemSachController implements Initializable {
     private JFXButton btHuy;
     
     public void btThemHandler(ActionEvent event) throws SQLException, IOException{
+
         try {
             Sach s = new Sach(this.txtMaSach.getText(),this.txtTenSach.getText(),
                     this.txtTacGia.getText(),this.txtTheLoai.getText(),
                     this.txtNxb.getText(),Integer.parseInt(this.txtSoLuong.getText()));
             JdbcSach.addSach(s);
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setContentText("Thêm Thành Công !!");
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setContentText("Thêm sách thành công !!");
             alert.show();
             txtMaSach.clear();
             txtTenSach.clear();
@@ -48,8 +49,8 @@ public class FXMLThemSachController implements Initializable {
             txtTheLoai.clear();
             txtNxb.clear();
             txtSoLuong.clear();
-            
-            
+            //Stage stage = (Stage)btThem.getScene().getWindow();
+            //stage.close();
         } catch (SQLException ex) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setContentText("Thêm  thất bại, lý do: " + ex.getMessage());

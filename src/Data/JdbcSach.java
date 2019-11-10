@@ -12,7 +12,6 @@ import java.util.logging.Logger;
 import quanlythuvien2.models.Sach;
 
 public class JdbcSach {
-    public static PreparedStatement ps;
 
     public static List<Sach> getSach() throws SQLException {
         Connection conn = Jdbc.getConn();
@@ -32,7 +31,22 @@ public class JdbcSach {
     }
     public static List<Sach> getSach(String loai,String giatri) throws SQLException {
         Connection conn = Jdbc.getConn();
-        String sql = "SELECT * FROM SACH WHERE "+loai+" like N'%"+giatri+"%'";        
+        String sql = "SELECT * FROM sach WHERE "+loai+" like N'%"+giatri+"%'";        
+        Statement stm = conn.createStatement();
+        ResultSet rs = stm.executeQuery(sql);
+        
+        List<Sach> listSach = new ArrayList<>();
+     
+        while (rs.next()) {
+            Sach s = new Sach(rs.getString("masach"), 
+                    rs.getString("tensach"), rs.getString("tacgia"),rs.getString("theloai"),rs.getString("nhaxuatban"),rs.getInt("soluong"));
+            listSach.add(s);
+        }
+        return listSach;
+    }
+    public static List<Sach> getSach1(String giatri) throws SQLException {
+        Connection conn = Jdbc.getConn();
+        String sql = "SELECT * FROM sach WHERE masach like N'%"+giatri+"%'";        
         Statement stm = conn.createStatement();
         ResultSet rs = stm.executeQuery(sql);
         
@@ -46,22 +60,9 @@ public class JdbcSach {
         return listSach;
     }
     
-    public static Sach getSach(String MaSach) throws SQLException {
-        Connection conn = Jdbc.getConn();
-        String sql = "SELECT * FROM SACH WHERE masach = '"+MaSach+"'";       
-        Statement stm = conn.createStatement();
-        ResultSet rs = stm.executeQuery(sql);
-        Sach s = null;
-//        Sach listSach = new Sach();
-     
-        while (rs.next()) {
-                s = new Sach(rs.getString("masach"), 
-                    rs.getString("tensach"), rs.getString("tacgia"),rs.getString("theloai"),rs.getString("nhaxuatban"),rs.getInt("soluong"));
-//            listSach.add(s);
-        }
-        
-        return s;
-    }
+    
+   
+    
 
     public static void addSach(Sach a) throws SQLException{
         
@@ -79,7 +80,11 @@ public class JdbcSach {
         stm.executeUpdate();
         
         
+        
     }
+    
+    
+    
     public static void delSach(String a) throws SQLException{
         Connection conn = Jdbc.getConn();
         
@@ -90,10 +95,10 @@ public class JdbcSach {
         stm.executeUpdate();
         
     }
-//     public static void main(String[] args) throws SQLException {
-//       for(Sach a: getSach())
-//            System.out.println(a.getTenSach());
-//    }
+    
+    
+    
+    public static PreparedStatement ps;
     public static boolean updateSach(Sach a){
         try {
             ps = Jdbc.getConn().prepareStatement("UPDATE sach SET  tensach = ?, tacgia = ?,"
@@ -111,4 +116,8 @@ public class JdbcSach {
         }
             return false;
     }
+//     public static void main(String[] args) throws SQLException {
+//       for(Sach a: getSach())
+//            System.out.println(a.getTenSach());
+//    }
 }

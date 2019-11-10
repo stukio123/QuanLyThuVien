@@ -6,6 +6,7 @@
 package quanlythuvien2;
 
 import Data.JdbcDocGia;
+import Data.JdbcSach;
 import Data.JdbcTheThuVien;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
@@ -26,6 +27,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.stage.Stage;
 import javax.swing.JOptionPane;
 import quanlythuvien2.models.DocGia;
 import quanlythuvien2.models.TheThuVien;
@@ -52,21 +54,38 @@ public class FXMLThemDocGiaController implements Initializable {
     private JFXRadioButton rdNam;
     @FXML
     private JFXRadioButton rdNu;
+    @FXML
+    private JFXButton btThem;
+    @FXML
+    private JFXButton btHuy;
+    
     
     public void btThemHandler(ActionEvent event) throws ParseException, SQLException{
 
         
 
         Date d = Date.valueOf(this.txtNamSinh.getValue());
-      JOptionPane.showMessageDialog(null, "fdgjkfdhgkhfdg", "Thông báo", 1);
-        boolean gt = false;
-        if (this.rdNam.isSelected()) gt = true;
-        DocGia dg = new DocGia(this.txtMaDG.getText(), this.txtTenDG.getText(), gt,d,this.txtDiaChi.getText(),this.cbSoThe.getValue());
+
+        String gt = "Nữ";
+        if (this.rdNam.isSelected()) gt = "Nam";
+        DocGia dg = new DocGia(Integer.parseInt(this.txtMaDG.getText()), 
+                this.txtTenDG.getText(), gt,d,this.txtDiaChi.getText(),
+                this.cbSoThe.getValue());
         
            JdbcDocGia.addDocGia(dg);
+           
+          Stage stage = (Stage)btThem.getScene().getWindow();
+          stage.close();
+
             
       
-    }
+    } 
+    
+    
+    public void btHuyHandler(ActionEvent event){
+        Stage stage = (Stage)btHuy.getScene().getWindow();
+        stage.close();
+     }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {

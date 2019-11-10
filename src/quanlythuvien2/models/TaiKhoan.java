@@ -12,12 +12,20 @@ package quanlythuvien2.models;
 public class TaiKhoan {
     private String tk;
     private String mk;
+    private int matk;
     private boolean quyenDangNhap;
     public TaiKhoan(String tk,String mk,boolean quyen){
         this.tk=tk;
         this.mk=mk;
         this.quyenDangNhap=quyen;
     }
+    
+    public TaiKhoan(int matk, String tk){
+        
+        this.matk = matk;
+        this.tk=tk;
+    }
+    
 
     /**
      * @return the tk
@@ -59,6 +67,20 @@ public class TaiKhoan {
      */
     public void setQuyenDangNhap(boolean quyenDangNhap) {
         this.quyenDangNhap = quyenDangNhap;
+    }
+
+    /**
+     * @return the matk
+     */
+    public int getMatk() {
+        return matk;
+    }
+
+    /**
+     * @param matk the matk to set
+     */
+    public void setMatk(int matk) {
+        this.matk = matk;
     }
     
 }

@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
@@ -14,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="755.0" prefWidth="1124.0" stylesheets="@styleSach.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="quanlythuvien2.FXMLSachController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="723.0" prefWidth="1162.0" stylesheets="@styleSach.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="quanlythuvien2.FXMLSachController">
    <children>
       <HBox prefHeight="107.0" prefWidth="1010.0" styleClass="hboxDau">
          <children>
@@ -26,7 +27,7 @@
                   <Insets left="10.0" right="20.0" />
                </HBox.margin>
             </ImageView>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Quản Lý Sách">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="QUẢN LÝ THƯ VIỆN">
                <HBox.margin>
                   <Insets right="30.0" />
                </HBox.margin></Text>
@@ -34,7 +35,7 @@
                <HBox.margin>
                   <Insets left="20.0" right="10.0" />
                </HBox.margin></JFXTextField>
-            <JFXButton contentDisplay="CENTER" onAction="#TimSach" prefHeight="29.0" prefWidth="44.0" text=" ">
+            <JFXButton contentDisplay="CENTER" onAction="#Tim" prefHeight="29.0" prefWidth="44.0" text=" ">
                <HBox.margin>
                   <Insets right="10.0" />
                </HBox.margin>
@@ -50,7 +51,7 @@
       </HBox>
       <HBox prefHeight="63.0" prefWidth="990.0" styleClass="hboxCapNhat" stylesheets="@styleSach.css">
          <children>
-            <JFXButton graphicTextGap="10.0" onAction="#btRefesh" prefWidth="120.0" text="Xem">
+            <JFXButton graphicTextGap="10.0" prefWidth="120.0" text="Xem" visible="false">
                <styleClass>
                   <String fx:value="btCapNhap" />
                   <String fx:value="Xem" />
@@ -76,7 +77,7 @@
                   </ImageView>
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="btnSua" graphicTextGap="10.0" onAction="#btChinhSuaHandler" prefWidth="120.0" text="Cập Nhập">
+            <JFXButton fx:id="btnSua" disable="true" graphicTextGap="10.0" onAction="#btChinhSuaHandler" prefWidth="120.0" text="Cập Nhập">
                <styleClass>
                   <String fx:value="btCapNhap" />
                   <String fx:value="Sua" />
@@ -89,7 +90,7 @@
                   </ImageView>
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="btnXoa" disable="true" graphicTextGap="10.0" onAction="#XoaSach" prefWidth="120.0" text="Xóa">
+            <JFXButton fx:id="btnXoa" disable="true" graphicTextGap="10.0" onAction="#btXoaHandler" prefWidth="120.0" text="Xóa">
                <HBox.margin>
                   <Insets />
                </HBox.margin>
@@ -98,7 +99,7 @@
                   <String fx:value="Xoa" />
                </styleClass>
                <graphic>
-                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="24.0" fitWidth="24.0" onDragDetected="#btXoaHandler" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../img/delete-24.png" />
                      </image>
@@ -109,9 +110,9 @@
             <Insets bottom="10.0" right="10.0" top="20.0" />
          </VBox.margin>
       </HBox>
-      <HBox alignment="CENTER" prefHeight="462.0" prefWidth="1107.0">
+      <HBox alignment="CENTER" prefHeight="448.0" prefWidth="1192.0" spacing="5.0">
          <children>
-            <VBox prefHeight="455.0" prefWidth="218.0">
+            <VBox alignment="CENTER" prefHeight="450.0" prefWidth="248.0">
                <children>
                   <JFXButton fx:id="btnQLSach" prefHeight="70.0" prefWidth="190.0" styleClass="btChucNang" text="Quản Lý Sách">
                      <padding>
@@ -163,8 +164,13 @@
                   </JFXButton>
                </children>
             </VBox>
-            <StackPane prefHeight="455.0" prefWidth="871.0">
+            <StackPane prefHeight="447.0" prefWidth="718.0">
                <children>
+                  <ImageView fitHeight="433.0" fitWidth="667.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/phan-mem-quan-ly-thu-vien-2.jpg" />
+                     </image>
+                  </ImageView>
                   <TableView fx:id="tbvSach" onMouseClicked="#ChonSach" prefHeight="455.0" prefWidth="307.0" visible="false">
                     <columns>
                       <TableColumn fx:id="tbcMaSach" prefWidth="75.0" text="Mã Sách" />
@@ -175,7 +181,7 @@
                         <TableColumn fx:id="tbcSoLuong" prefWidth="96.0" text="Số Lượng" />
                     </columns>
                   </TableView>
-                  <TableView fx:id="tbvDG" prefHeight="200.0" prefWidth="200.0" visible="false">
+                  <TableView fx:id="tbvDG" onMouseClicked="#ChonDocGia" prefHeight="200.0" prefWidth="200.0" visible="false">
                     <columns>
                       <TableColumn fx:id="tbcMaDG" prefWidth="75.0" text="Mã ĐG" />
                       <TableColumn fx:id="tbcTenDG" prefWidth="75.0" text="Tên DG" />
@@ -185,11 +191,136 @@
                         <TableColumn fx:id="tbcMaThe" prefWidth="75.0" text="Số Thẻ TV" />
                     </columns>
                   </TableView>
+                  <TableView fx:id="tbvNV" onMouseClicked="#ChonNV" prefHeight="200.0" prefWidth="200.0" visible="false">
+                    <columns>
+                      <TableColumn fx:id="tbcMaNV" prefWidth="75.0" text="MaNV" />
+                      <TableColumn fx:id="tbcTenNV" prefWidth="75.0" text="TenNV" />
+                        <TableColumn fx:id="tbcGioiTinhNV" prefWidth="75.0" text="Giới Tính" />
+                        <TableColumn fx:id="tbcNgaySinhNV" prefWidth="75.0" text="Năm Sinh" />
+                        <TableColumn fx:id="tbcDiaChiNV" prefWidth="75.0" text="DiaChi" />
+                        <TableColumn fx:id="tbcMaTK" prefWidth="75.0" text="TenTK" />
+                    </columns>
+                  </TableView>
+                  <TableView fx:id="tbvMuonSach" onMouseClicked="#ChonMuonS" prefHeight="200.0" prefWidth="200.0" visible="false">
+                    <columns>
+                      <TableColumn fx:id="tbcMaMuon" prefWidth="75.0" text="Mamuon" />
+                      <TableColumn fx:id="tbcMaTheMuon" prefWidth="75.0" text="mathe" />
+                        <TableColumn fx:id="tbcMaSachMuon" prefWidth="75.0" text="masach" />
+                        <TableColumn fx:id="tbcNgayMuon" prefWidth="75.0" text="ngaymuon" />
+                        <TableColumn fx:id="tbcGhiChu" prefWidth="75.0" text="Ghi Chú" />
+                    </columns>
+                  </TableView>
+                  <TableView fx:id="tbvTraSach" prefHeight="200.0" prefWidth="200.0" visible="false">
+                    <columns>
+                      <TableColumn fx:id="tbcMaTra" prefWidth="75.0" text="Mã trả" />
+                      <TableColumn fx:id="tbcMaMuonTra" prefWidth="75.0" text="Mã mượn" />
+                        <TableColumn fx:id="tbcNgayTra" prefWidth="75.0" text="Ngày trả" />
+                        <TableColumn fx:id="tbcNgayTre" prefWidth="138.0" text="Ngày quá hẹn(30 ngày)" />
+                        <TableColumn fx:id="tbcTienPhat" minWidth="0.0" prefWidth="146.0" text="Tiền phạt quá hạn trả" />
+                    </columns>
+                  </TableView>
                </children>
+            </StackPane>
+            <StackPane maxHeight="-Infinity" maxWidth="-Infinity">
+               <children>
+                  <VBox fx:id="vboxMuonSach" styleClass="VboxMuonSach" visible="false">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Thông tin mượn sách" textAlignment="CENTER" wrappingWidth="227.5673828125" />
+                        <HBox prefHeight="17.0" prefWidth="185.0">
+                           <children>
+                              <JFXTextField fx:id="txtMaThe" prefHeight="25.0" prefWidth="149.0" promptText="Mã thẻ" unFocusColor="#f8f8f8" />
+                              <JFXButton onAction="#TimDGMuon" prefHeight="31.0" prefWidth="66.0" text="KT mã" />
+                           </children>
+                           <VBox.margin>
+                              <Insets left="10.0" right="10.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox prefHeight="24.0" prefWidth="185.0">
+                           <children>
+                              <JFXTextField fx:id="txtMaSach" prefHeight="25.0" prefWidth="150.0" promptText="Mã sach" unFocusColor="WHITE" />
+                              <JFXButton onAction="#TimSachMuon" text="KT mã" />
+                           </children>
+                           <VBox.margin>
+                              <Insets left="10.0" right="10.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <JFXDatePicker fx:id="txtNgayMuon" defaultColor="WHITE" prefHeight="25.0" prefWidth="233.0" promptText="Ngày mượn">
+                           <VBox.margin>
+                              <Insets left="10.0" right="10.0" />
+                           </VBox.margin>
+                        </JFXDatePicker>
+                        <JFXTextField fx:id="txtSoLuongMuon" unFocusColor="#fffefe">
+                           <VBox.margin>
+                              <Insets left="10.0" right="10.0" />
+                           </VBox.margin>
+                        </JFXTextField>
+                        <JFXButton fx:id="btLuuMuonSach" onAction="#btLuuMuonSach" text="Luu" />
+                     </children>
+                     <StackPane.margin>
+                        <Insets />
+                     </StackPane.margin>
+                  </VBox>
+                  <VBox fx:id="vboxSuaSach" styleClass="VboxMuonSach" visible="false">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cập Nhật Sách">
+                           <VBox.margin>
+                              <Insets bottom="20.0" />
+                           </VBox.margin>
+                        </Text>
+                        <JFXTextField fx:id="txtMaSachSua" focusColor="WHITE" promptText="Mã Sách" unFocusColor="WHITE">
+                           <VBox.margin>
+                              <Insets left="5.0" right="5.0" />
+                           </VBox.margin>
+                        </JFXTextField>
+                        <JFXTextField fx:id="txtTenSachSua" focusColor="WHITE" promptText="Tên Sách" unFocusColor="WHITE">
+                           <VBox.margin>
+                              <Insets left="5.0" right="5.0" />
+                           </VBox.margin>
+                        </JFXTextField>
+                        <JFXTextField fx:id="txtTacGiaSua" focusColor="WHITE" promptText="Tác Giả" unFocusColor="WHITE">
+                           <VBox.margin>
+                              <Insets left="5.0" right="5.0" />
+                           </VBox.margin>
+                        </JFXTextField>
+                        <JFXTextField fx:id="txtTheLoaiSua" focusColor="WHITE" promptText="Nhà Sản Xuất" unFocusColor="WHITE">
+                           <VBox.margin>
+                              <Insets left="5.0" right="5.0" />
+                           </VBox.margin>
+                        </JFXTextField>
+                        <JFXTextField fx:id="txtNSXSua" focusColor="WHITE" promptText="Thể Loại" unFocusColor="WHITE">
+                           <VBox.margin>
+                              <Insets left="5.0" right="5.0" />
+                           </VBox.margin>
+                        </JFXTextField>
+                        <JFXTextField fx:id="txtSoLuongSua" focusColor="WHITE" promptText="Số Lượng" unFocusColor="WHITE">
+                           <VBox.margin>
+                              <Insets left="5.0" right="5.0" />
+                           </VBox.margin>
+                        </JFXTextField>
+                        <JFXButton onAction="#LuuSuaSach" text="Lưu" />
+                     </children>
+                  </VBox>
+                  <VBox fx:id="vboxTraSach" styleClass="VboxMuonSach" visible="false">
+                     <children>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <JFXTextField fx:id="txtMaMuon" />
+                              <JFXButton onAction="#TimMaMuon" text="KT Mượn" />
+                           </children>
+                        </HBox>
+                        <JFXTextField fx:id="txtNgayMuonTra" />
+                        <JFXDatePicker fx:id="txtNgayTra" />
+                        <JFXButton onAction="#btLuuTraSach" text="Trả Sách" />
+                     </children>
+                  </VBox>
+               </children>
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
             </StackPane>
          </children>
       </HBox>
-      <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
+      <HBox alignment="CENTER_RIGHT" prefHeight="60.0" prefWidth="1142.0">
          <children>
             <JFXButton graphicTextGap="10.0" onAction="#btQuayLaiHandler" text="Quay Lại">
                <graphic>

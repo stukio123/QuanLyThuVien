@@ -57,7 +57,7 @@ public class FXMLDangNhapController implements Initializable {
         if (kq == true){
             Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("FXMLTrangChinh.fxml"));
+            loader.setLocation(getClass().getResource("FXMLSach.fxml"));
             Parent ChucNang = loader.load();
             Scene scene = new Scene(ChucNang);
             stage.setScene(scene);
