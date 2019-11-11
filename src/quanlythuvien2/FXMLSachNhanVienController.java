@@ -16,7 +16,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
 import java.sql.SQLException;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -49,7 +48,7 @@ import quanlythuvien2.models.NhanVien;
 import quanlythuvien2.models.Sach;
 import quanlythuvien2.models.TraSach;
 
-public class FXMLSachController implements Initializable {
+public class FXMLSachNhanVienController implements Initializable {
 
     @FXML
     private TableView<Sach> tbvSach;
@@ -126,32 +125,18 @@ public class FXMLSachController implements Initializable {
     @FXML
     private JFXTextField txtSoLuongSua;
     @FXML
-    private JFXTextField txtMaNhanVien;
-    @FXML
-    private JFXTextField txtTenNhanVien;
-    @FXML
-    private JFXTextField txtGioiTinh;
-    @FXML
-    private JFXTextField txtNamSinh;
-    @FXML
-    private JFXTextField txtDiaChi;
-    @FXML
-    private JFXTextField txtMaTK;
-    @FXML
     private VBox vboxSuaSach;
     @FXML
     private VBox vboxMuonSach;
-    @FXML
-    private VBox vboxSuaNhanVien1;
     
     private int delNV = 0;
     private String delMaSach = "";
     private String chucNang = "";
     private String chucNangXoa = "";
-    SimpleDateFormat DatetoString = new SimpleDateFormat("dd-MM-yyyy");
-    SimpleDateFormat StringtoDate = new SimpleDateFormat("yyyy-MM-dd");
 
     ObservableList<String> listLoai;
+
+    
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -208,7 +193,6 @@ public class FXMLSachController implements Initializable {
             this.chucNang = "NhanVien";
             this.tbvTraSach.setVisible(false);
             this.vboxTraSach.setVisible(false);
-            this.vboxSuaNhanVien1.setVisible(true);
 
             try {
                 this.loadNV(JdbcNhanVien.getNV());
@@ -365,6 +349,11 @@ public class FXMLSachController implements Initializable {
                     loadSach(getSach());
                     break;
             }
+//            String sql = "SELECT * from SACH WHERE Ma_Sach like N'%"+this.txtTim.getText()+"%' "
+//                    + "or Ten_Sach like N'%"+this.txtTim.getText()+"%'"
+//                    + "or Ten_Tac_gia like N'%"+this.txtTim.getText()+"%'"
+//                    + "or Nha_xb like N'%"+this.txtTim.getText()+"%'";
+//            LoadData(sql);
         }
     }
 
@@ -465,14 +454,6 @@ public class FXMLSachController implements Initializable {
         btnSua.setDisable(false);
         btnXoa.setDisable(false);
         delNV = tbvNV.getSelectionModel().getSelectedItem().getMaNV();
-        System.out.println(delNV);
-        
-        this.txtMaNhanVien.setText(String.valueOf(tbvNV.getSelectionModel().getSelectedItem().getMaNV()));
-        this.txtTenNhanVien.setText(tbvNV.getSelectionModel().getSelectedItem().getTenNV());
-        this.txtGioiTinh.setText(tbvNV.getSelectionModel().getSelectedItem().getGioiTinh());
-        this.txtNamSinh.setText(tbvNV.getSelectionModel().getSelectedItem().getNgaySinh().toString());
-        this.txtDiaChi.setText(tbvNV.getSelectionModel().getSelectedItem().getDiaChi());
-        this.txtMaTK.setText(String.valueOf(tbvNV.getSelectionModel().getSelectedItem().getMaTK()));
     }
 
     @FXML
@@ -483,29 +464,6 @@ public class FXMLSachController implements Initializable {
         } else {
             this.loadNV(JdbcNhanVien.getNV(this.txtTim.getText()));
         }
-    }
-    
-    @FXML
-    public void LuuSuaNhanVien(ActionEvent event) throws SQLException, ParseException {
-        NhanVien a = new NhanVien(
-                Integer.valueOf(this.txtMaNhanVien.getText()), 
-                this.txtTenNhanVien.getText(),
-                this.txtGioiTinh.getText(),
-                Date.valueOf(this.txtNamSinh.getText()),
-                this.txtDiaChi.getText(), 
-                Integer.valueOf(this.txtMaTK.getText())
-                );
-        if (JdbcNhanVien.updateNhanVien(a)) {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setContentText("Lưu Thành Công !!");
-            alert.show();
-        } else {
-
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Lưu thất bại");
-            alert.show();
-        }
-        loadSach(getSach());
     }
 
 //----------------------------------------CHƯC NĂNG CHÍNH CÓ TRÊN GIAO DIỆN THÊM XÓA SỬA------------------------------  
@@ -791,3 +749,4 @@ public class FXMLSachController implements Initializable {
         }
     }
 }
+

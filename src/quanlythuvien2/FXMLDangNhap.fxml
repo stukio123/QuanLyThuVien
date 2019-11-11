@@ -40,7 +40,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <JFXRadioButton fx:id="rdQuanLy" text="Quản Lý">
+                  <JFXRadioButton fx:id="rdQuanLy" selected="true" text="Quản Lý">
                      <HBox.margin>
                         <Insets right="20.0" />
                      </HBox.margin>

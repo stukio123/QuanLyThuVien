@@ -8,6 +8,8 @@ import java.sql.Statement;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import quanlythuvien2.models.NhanVien;
 
 public class JdbcNhanVien {
@@ -24,15 +26,10 @@ public class JdbcNhanVien {
                     ,rs.getDate("namsinh"),
                     rs.getString("diachi"),rs.getInt("matk"));
             listNV.add(s);
-        }
-        
-        
-        
+        }  
         return listNV;
     }
-    
-    
-    
+
     public static void addNhanVien(NhanVien nv) throws SQLException{
         Connection conn = Jdbc.getConn();
         
@@ -47,9 +44,7 @@ public class JdbcNhanVien {
         
         stm.executeUpdate();
     }
-    
-    
-    
+
     public static void delNhanVien(int a) throws SQLException{
         Connection conn = Jdbc.getConn();
         
@@ -60,9 +55,7 @@ public class JdbcNhanVien {
         stm.executeUpdate();
         
     }
-    
-    
-    
+
     public static List<NhanVien> getNV(String giatri) throws SQLException, ParseException {
         Connection conn = Jdbc.getConn();
         String sql = "SELECT * FROM nhanvien WHERE manv like N'%"+giatri+"%'";        
@@ -77,5 +70,24 @@ public class JdbcNhanVien {
             list.add(s);
         }
         return list;
+    }
+    
+    public static PreparedStatement ps;
+    public static boolean updateNhanVien(NhanVien a){
+        try {
+            ps = Jdbc.getConn().prepareStatement("UPDATE nhanvien SET  hoten = ?, gioitinh = ?,"
+                    + "namsinh = ?, diachi = ?,matk =? where manv = ?");
+            ps.setInt(6, a.getMaNV());
+            
+            ps.setString(1, a.getTenNV());
+            ps.setString(2, a.getGioiTinh());
+            ps.setDate(3, a.getNgaySinh());
+            ps.setString(4, a.getDiaChi());
+            ps.setInt(5, a.getMaTK());
+            return ps.executeUpdate() >0;
+        } catch (SQLException ex) {
+            Logger.getLogger(JdbcSach.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            return false;
     }
 }
