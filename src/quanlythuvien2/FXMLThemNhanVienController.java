@@ -18,7 +18,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
-import javax.swing.JOptionPane;
 import quanlythuvien2.models.NhanVien;
 import quanlythuvien2.models.TaiKhoan;
 
@@ -52,26 +51,35 @@ public class FXMLThemNhanVienController implements Initializable {
                 ma = tk.getMatk();
             }
         }
+        try{
         //JOptionPane.showMessageDialog(null, ma, "Thông báo", 1);
         if (this.rdNam.isSelected()) gt = "Nam";
         NhanVien nv = new NhanVien(Integer.parseInt(this.txtMaNV.getText()),
                 this.txtTenNV.getText(),gt,d,this.txtDiaChi.getText(),
                 ma);
-        try{
+        
             JdbcNhanVien.addNhanVien(nv);
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setHeaderText("Thành Công");
             alert.setContentText("Thêm nhân viên thành công");
-            alert.show();
+            alert.showAndWait();
+            Stage stage = (Stage)btThem.getScene().getWindow();
+            stage.close();
         }catch(SQLException ex)
         {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText("Thất Bại");
             alert.setContentText("Lỗi khi thêm nhân viên");
             alert.show();
+        }catch(NumberFormatException ex)
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("Thất Bại");
+            alert.setContentText("Lỗi khi thêm nhân viên\n" + ex.getMessage());
+            alert.show();
         }
-        Stage stage = (Stage)btThem.getScene().getWindow();
-        stage.close();
+        
+        
     } 
     
     public void btHuyHandler(ActionEvent event){

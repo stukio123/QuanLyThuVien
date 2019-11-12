@@ -34,28 +34,75 @@ public class FXMLThemSachController implements Initializable {
     private JFXButton btHuy;
     
     public void btThemHandler(ActionEvent event) throws SQLException, IOException{
-
-        try {
-            Sach s = new Sach(this.txtMaSach.getText(),this.txtTenSach.getText(),
-                    this.txtTacGia.getText(),this.txtTheLoai.getText(),
-                    this.txtNxb.getText(),Integer.parseInt(this.txtSoLuong.getText()));
-            JdbcSach.addSach(s);
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setContentText("Thêm sách thành công !!");
-            alert.show();
-            txtMaSach.clear();
-            txtTenSach.clear();
-            txtTacGia.clear();
-            txtTheLoai.clear();
-            txtNxb.clear();
-            txtSoLuong.clear();
-            //Stage stage = (Stage)btThem.getScene().getWindow();
-            //stage.close();
-        } catch (SQLException ex) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Thêm  thất bại, lý do: " + ex.getMessage());
-            alert.show();
-        }
+//        if(this.txtMaSach.getText().trim().length() >= 11)
+//        {
+//            Alert alert = new Alert(Alert.AlertType.ERROR);
+//            alert.setHeaderText("");
+//            alert.setContentText("Mã sách vượt quá 10 ký tự");
+//            alert.show();
+//        }
+//        if(this.txtTenSach.getText().trim().length() >= 46)
+//        {
+//            Alert alert = new Alert(Alert.AlertType.ERROR);
+//            alert.setHeaderText("");
+//            alert.setContentText("Tên sách vượt quá 10 ký tự");
+//            alert.show();
+//        }
+//        if(this.txtTacGia.getText().trim().length() >= 46)
+//        {
+//            Alert alert = new Alert(Alert.AlertType.ERROR);
+//            alert.setHeaderText("");
+//            alert.setContentText("Tên Tác Giả vượt quá 10 ký tự");
+//            alert.show();
+//        }
+//        if(this.txtTheLoai.getText().trim().length() >= 46)
+//        {
+//            Alert alert = new Alert(Alert.AlertType.ERROR);
+//            alert.setHeaderText("");
+//            alert.setContentText("Thể Loại vượt quá 10 ký tự");
+//            alert.show();
+//        }
+//        if(this.txtNxb.getText().trim().length() >= 46)
+//        {
+//            Alert alert = new Alert(Alert.AlertType.ERROR);
+//            alert.setHeaderText("");
+//            alert.setContentText("Nhà Xuất Bản vượt quá 10 ký tự");
+//            alert.show();
+//        }
+//        if(this.txtSoLuong.getText().trim().length() >= 12)
+//        {
+//            Alert alert = new Alert(Alert.AlertType.ERROR);
+//            alert.setHeaderText("");
+//            alert.setContentText("Số Lượng vượt quá 11 đơn vị");
+//            alert.show();
+//        }
+            try {
+                Sach s = new Sach(this.txtMaSach.getText(),this.txtTenSach.getText(),
+                        this.txtTacGia.getText(),this.txtTheLoai.getText(),
+                        this.txtNxb.getText(),Integer.parseInt(this.txtSoLuong.getText()));
+                JdbcSach.addSach(s);
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setContentText("Thêm sách thành công !!");
+                alert.show();
+                txtMaSach.clear();
+                txtTenSach.clear();
+                txtTacGia.clear();
+                txtTheLoai.clear();
+                txtNxb.clear();
+                txtSoLuong.clear();
+                //Stage stage = (Stage)btThem.getScene().getWindow();
+                //stage.close();
+            } catch (SQLException ex) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("Thêm  thất bại, lý do: " + ex.getMessage());
+                alert.show();
+            } catch(NumberFormatException ex)
+            {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("Thêm  thất bại, lý do: " + ex.getMessage());
+                alert.show();
+            }
+        
     }
     
      public void btHuyHandler(ActionEvent event){

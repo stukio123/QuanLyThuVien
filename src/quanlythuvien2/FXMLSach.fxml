@@ -267,7 +267,7 @@
                               <Insets bottom="20.0" />
                            </VBox.margin>
                         </Text>
-                        <JFXTextField fx:id="txtMaSachSua" focusColor="WHITE" promptText="Mã Sách" unFocusColor="WHITE">
+                        <JFXTextField fx:id="txtMaSachSua" editable="false" focusColor="WHITE" promptText="Mã Sách" unFocusColor="WHITE">
                            <VBox.margin>
                               <Insets left="5.0" right="5.0" />
                            </VBox.margin>
@@ -307,7 +307,7 @@
                               <Insets bottom="20.0" />
                            </VBox.margin>
                         </Text>
-                        <JFXTextField fx:id="txtMaNhanVien" focusColor="WHITE" promptText="Mã Nhân Viên" unFocusColor="WHITE">
+                        <JFXTextField fx:id="txtMaNhanVien" editable="false" focusColor="WHITE" promptText="Mã Nhân Viên" unFocusColor="WHITE">
                            <VBox.margin>
                               <Insets left="5.0" right="5.0" />
                            </VBox.margin>
@@ -351,6 +351,46 @@
                         <JFXTextField fx:id="txtNgayMuonTra" />
                         <JFXDatePicker fx:id="txtNgayTra" />
                         <JFXButton onAction="#btLuuTraSach" text="Trả Sách" />
+                     </children>
+                  </VBox>
+                  <VBox fx:id="vboxSuaDG" layoutX="10.0" layoutY="10.0" styleClass="VboxMuonSach" visible="false">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cập Nhật Độc Giả">
+                           <VBox.margin>
+                              <Insets bottom="20.0" />
+                           </VBox.margin>
+                        </Text>
+                        <JFXTextField fx:id="txtMaDocGia" editable="false" focusColor="WHITE" promptText="Mã Sách" unFocusColor="WHITE">
+                           <VBox.margin>
+                              <Insets left="5.0" right="5.0" />
+                           </VBox.margin>
+                        </JFXTextField>
+                        <JFXTextField fx:id="txtTenDocGia" focusColor="WHITE" promptText="Tên Sách" unFocusColor="WHITE">
+                           <VBox.margin>
+                              <Insets left="5.0" right="5.0" />
+                           </VBox.margin>
+                        </JFXTextField>
+                        <JFXTextField fx:id="txtGioiTinhDG" focusColor="WHITE" promptText="Tác Giả" unFocusColor="WHITE">
+                           <VBox.margin>
+                              <Insets left="5.0" right="5.0" />
+                           </VBox.margin>
+                        </JFXTextField>
+                        <JFXTextField fx:id="txtNamSinhDG" focusColor="WHITE" promptText="Nhà Sản Xuất" unFocusColor="WHITE">
+                           <VBox.margin>
+                              <Insets left="5.0" right="5.0" />
+                           </VBox.margin>
+                        </JFXTextField>
+                        <JFXTextField fx:id="txtDiaChiDG" focusColor="WHITE" promptText="Thể Loại" unFocusColor="WHITE">
+                           <VBox.margin>
+                              <Insets left="5.0" right="5.0" />
+                           </VBox.margin>
+                        </JFXTextField>
+                        <JFXTextField fx:id="txtSoThe" focusColor="WHITE" promptText="Số Lượng" unFocusColor="WHITE">
+                           <VBox.margin>
+                              <Insets left="5.0" right="5.0" />
+                           </VBox.margin>
+                        </JFXTextField>
+                        <JFXButton onAction="#LuuSuaDocGia" text="Lưu" />
                      </children>
                   </VBox>
                </children>

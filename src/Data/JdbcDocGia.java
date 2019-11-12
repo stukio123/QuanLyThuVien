@@ -9,7 +9,11 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.scene.control.Alert;
 import quanlythuvien2.models.DocGia;
+import quanlythuvien2.models.NhanVien;
 
 public class JdbcDocGia {
     
@@ -92,5 +96,32 @@ public class JdbcDocGia {
         System.out.println(sql);
         stm.executeUpdate();
         
+    }
+    public static PreparedStatement ps;
+    public static boolean updateDocGia(DocGia a){
+        try {
+            ps = Jdbc.getConn().prepareStatement("UPDATE docgia SET  tendocgia = ?, gioitinh = ?,"
+                    + "namsinh = ?, diachi = ?,sothe =? where madocgia = ?");
+            ps.setInt(6, a.getMaDG());
+            
+            ps.setString(1, a.getTenDG());
+            ps.setString(2, a.isGioiTinh());
+            ps.setDate(3, a.getNamSinh());
+            ps.setString(4, a.getDiaChi());
+            ps.setInt(5, a.getSoThe());
+            return ps.executeUpdate() >0;
+        } catch (SQLException ex) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Lưu thất bại, lý do: " + ex.getMessage());
+            alert.show();
+            return false;
+        }catch(Exception ex)
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Lưu thất bại, lý do: " + ex.getMessage());
+            alert.show();
+            return false;
+        }
+            
     }
 }

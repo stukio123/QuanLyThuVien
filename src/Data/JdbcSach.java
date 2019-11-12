@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.control.Alert;
 import quanlythuvien2.models.Sach;
 
 public class JdbcSach {
@@ -112,7 +113,9 @@ public class JdbcSach {
             ps.setInt(5, a.getSoLuong());
             return ps.executeUpdate() >0;
         } catch (SQLException ex) {
-            Logger.getLogger(JdbcSach.class.getName()).log(Level.SEVERE, null, ex);
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Lưu thất bại, lý do: " + ex.getMessage());
+            alert.show();
         }
             return false;
     }

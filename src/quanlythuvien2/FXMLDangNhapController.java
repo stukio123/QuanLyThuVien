@@ -39,41 +39,45 @@ public class FXMLDangNhapController implements Initializable {
         // TODO
     }    
     
-    public void btDangNhapHandler(ActionEvent event) throws SQLException, IOException {
+    public void btDangNhapHandler(ActionEvent event)  {
         boolean ktQuyen = true;
         boolean kq = false;
-        if(this.txtTaiKhoan.getText().length() == 0 || this.txtMatKhau.getText().length() == 0){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Tên tài khoản và mật khẩu không được để trống");
-        }
-        else{
-        if(!this.rdQuanLy.isSelected()) ktQuyen = false;
-            TaiKhoan tk = new TaiKhoan(this.txtTaiKhoan.getText(),this.txtMatKhau.getText(),ktQuyen);
-        for (TaiKhoan a : JdbcTaiKhoan.getTaiKhoan()){
-            if(tk.getTk().equals(a.getTk()) && (tk.getMk().equals(a.getMk())) && (tk.isQuyenDangNhap() == a.isQuyenDangNhap()) ){
-                kq = true;
+        try{
+            if(this.txtTaiKhoan.getText().trim().length() == 0 || this.txtMatKhau.getText().trim().length() == 0){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("Tên tài khoản và mật khẩu không được để trống");
             }
-        }
-        if (kq == true){
-            if(tk.isQuyenDangNhap()){
-            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("FXMLSach.fxml"));
-            Parent ChucNang = loader.load();
-            Scene scene = new Scene(ChucNang);
-            stage.setScene(scene);
-            stage.show();
-            }else{
+            else{
+            if(!this.rdQuanLy.isSelected()) ktQuyen = false;
+                TaiKhoan tk = new TaiKhoan(this.txtTaiKhoan.getText().trim(),this.txtMatKhau.getText().trim(),ktQuyen);
+            for (TaiKhoan a : JdbcTaiKhoan.getTaiKhoan()){
+                if(tk.getTk().equals(a.getTk()) && (tk.getMk().equals(a.getMk())) && (tk.isQuyenDangNhap() == a.isQuyenDangNhap()) ){
+                    kq = true;
+                }
+            }
+            if (kq == true){
+                if(tk.isQuyenDangNhap()){
                 Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("FXMLSachNhanVien.fxml"));
-            Parent ChucNang = loader.load();
-            Scene scene = new Scene(ChucNang);
-            stage.setScene(scene);
-            stage.show();
-            }}
-        else JOptionPane.showMessageDialog(null, "Không tồn  tại tài khoản", "Thông báo", 1);
-        
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("FXMLSach.fxml"));
+                Parent ChucNang = loader.load();
+                Scene scene = new Scene(ChucNang);
+                stage.setScene(scene);
+                stage.show();
+                }else{
+                    Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("FXMLSachNhanVien.fxml"));
+                Parent ChucNang = loader.load();
+                Scene scene = new Scene(ChucNang);
+                stage.setScene(scene);
+                stage.show();
+                }}
+            else JOptionPane.showMessageDialog(null, "Không tồn  tại tài khoản", "Thông báo", 1);
+        }
+        }catch(SQLException | IOException ex){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Không thể kết nối đến server ");
         }
         
     }

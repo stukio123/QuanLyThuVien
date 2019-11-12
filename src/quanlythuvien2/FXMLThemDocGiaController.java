@@ -1,12 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package quanlythuvien2;
 
 import Data.JdbcDocGia;
-import Data.JdbcSach;
 import Data.JdbcTheThuVien;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
@@ -17,26 +11,15 @@ import java.net.URL;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
-import javax.swing.JOptionPane;
 import quanlythuvien2.models.DocGia;
-import quanlythuvien2.models.TheThuVien;
 
-/**
- * FXML Controller class
- *
- * @author Tran Nguyen Anh
- */
 public class FXMLThemDocGiaController implements Initializable {
     @FXML
     private JFXTextField txtMaDG;
@@ -60,23 +43,36 @@ public class FXMLThemDocGiaController implements Initializable {
     private JFXButton btHuy;
     
     
-    public void btThemHandler(ActionEvent event) throws ParseException, SQLException{
-
+    public void btThemHandler(ActionEvent event){
+        try{
+            Date d = Date.valueOf(this.txtNamSinh.getValue());
+            String gt = "Nữ";
+            if (this.rdNam.isSelected()) gt = "Nam";
+            DocGia dg = new DocGia(Integer.parseInt(this.txtMaDG.getText()), 
+                    this.txtTenDG.getText(), gt,d,this.txtDiaChi.getText(),
+                    this.cbSoThe.getValue());
+            JdbcDocGia.addDocGia(dg);
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setContentText("Thêm sách thành công !!");
+            alert.showAndWait();
+            Stage stage = (Stage)btThem.getScene().getWindow();
+            stage.close();
+        } catch (SQLException ex) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Thêm  thất bại, lý do: " + ex.getMessage());
+            alert.show();
+        } catch(NumberFormatException ex)
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Thêm  thất bại, lý do: " + ex.getMessage());
+            alert.show();
+        }catch(ParseException ex)
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Nhập sai định dạng ngày tháng năm (Năm\\Tháng\\Ngày\\)");
+            alert.show();
+        }
         
-
-        Date d = Date.valueOf(this.txtNamSinh.getValue());
-
-        String gt = "Nữ";
-        if (this.rdNam.isSelected()) gt = "Nam";
-        DocGia dg = new DocGia(Integer.parseInt(this.txtMaDG.getText()), 
-                this.txtTenDG.getText(), gt,d,this.txtDiaChi.getText(),
-                this.cbSoThe.getValue());
-        
-           JdbcDocGia.addDocGia(dg);
-           
-          Stage stage = (Stage)btThem.getScene().getWindow();
-          stage.close();
-
             
       
     } 
