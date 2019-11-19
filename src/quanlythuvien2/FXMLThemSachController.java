@@ -77,6 +77,8 @@ public class FXMLThemSachController implements Initializable {
 //            alert.show();
 //        }
             try {
+                if(Integer.parseInt(txtSoLuong.getText()) >=0)
+                {
                 Sach s = new Sach(this.txtMaSach.getText(),this.txtTenSach.getText(),
                         this.txtTacGia.getText(),this.txtTheLoai.getText(),
                         this.txtNxb.getText(),Integer.parseInt(this.txtSoLuong.getText()));
@@ -92,6 +94,11 @@ public class FXMLThemSachController implements Initializable {
                 txtSoLuong.clear();
                 //Stage stage = (Stage)btThem.getScene().getWindow();
                 //stage.close();
+                }else{
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setContentText("Số lượng không thể âm ( số lượng < 0)");
+                    alert.show();
+                }
             } catch (SQLException ex) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setContentText("Thêm  thất bại, lý do: " + ex.getMessage());

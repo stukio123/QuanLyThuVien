@@ -249,6 +249,8 @@ public class FXMLSachController implements Initializable {
             this.chucNang = "MuonSach";
             this.tbvTraSach.setVisible(false);
             this.vboxTraSach.setVisible(false);
+            this.vboxSuaDG.setVisible(false);
+            this.vboxSuaSach.setVisible(false);
 
             try {
                 this.loadMuonSach(JdbcMuonSach.getMS());
@@ -515,14 +517,21 @@ public class FXMLSachController implements Initializable {
 //            alert.show();
 //        }
         try{
-            Sach s = new Sach(this.txtMaSachSua.getText(), this.txtTenSachSua.getText().trim(),
-                this.txtTacGiaSua.getText().trim(), this.txtTheLoaiSua.getText().trim(), this.txtNSXSua.getText().trim(),
-                Integer.parseInt(this.txtSoLuongSua.getText().trim()));
-            if (JdbcSach.updateSach(s)) {
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.setContentText("Lưu Thành Công !!");
-                alert.show();
-                loadSach(getSach());
+            if(Integer.parseInt(txtSoLuongSua.getText()) >=0)
+            {
+                Sach s = new Sach(this.txtMaSachSua.getText(), this.txtTenSachSua.getText().trim(),
+                    this.txtTacGiaSua.getText().trim(), this.txtTheLoaiSua.getText().trim(), this.txtNSXSua.getText().trim(),
+                    Integer.parseInt(this.txtSoLuongSua.getText().trim()));
+                if (JdbcSach.updateSach(s)) {
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setContentText("Lưu Thành Công !!");
+                    alert.show();
+                    loadSach(getSach());
+                }
+            }else{
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setContentText("Số lượng không thể âm ( số lượng < 0)");
+                    alert.show();
             }
         }catch(MysqlDataTruncation ex){
             Alert alert = new Alert(Alert.AlertType.ERROR);

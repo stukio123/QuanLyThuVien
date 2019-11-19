@@ -46,10 +46,11 @@ public class FXMLDangNhapController implements Initializable {
             if(this.txtTaiKhoan.getText().trim().length() == 0 || this.txtMatKhau.getText().trim().length() == 0){
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setContentText("Tên tài khoản và mật khẩu không được để trống");
+                alert.show();
             }
             else{
             if(!this.rdQuanLy.isSelected()) ktQuyen = false;
-                TaiKhoan tk = new TaiKhoan(this.txtTaiKhoan.getText().trim(),this.txtMatKhau.getText().trim(),ktQuyen);
+                TaiKhoan tk = new TaiKhoan(this.txtTaiKhoan.getText(),this.txtMatKhau.getText(),ktQuyen);
             for (TaiKhoan a : JdbcTaiKhoan.getTaiKhoan()){
                 if(tk.getTk().equals(a.getTk()) && (tk.getMk().equals(a.getMk())) && (tk.isQuyenDangNhap() == a.isQuyenDangNhap()) ){
                     kq = true;
