@@ -30,16 +30,20 @@ public class ThemNhanVien {
 //        int expected = 2;
 //        Assert.assertEquals(expected, actual);
 //    }
-    @Test(expected = NumberFormatException.class)
+    @Test
     public void testTCNV1(){
         FXMLThemNhanVienController nv = new FXMLThemNhanVienController();
-        nv.themNhanVien("111111111111", "Tri Quang", "Nam ", new java.sql.Date(07 - 10 - 1999), "Ca Mau", 1);
+        int actual = nv.themNhanVien("111111111111", "Tri Quang", "Nam ", new java.sql.Date(07 - 10 - 1999), "Ca Mau", 1);
+        int expected = 5;
+        Assert.assertEquals(expected, actual);
     }
-    @Test(expected = NumberFormatException.class)
+    @Test
     public void testTCNV2_3_4_5_22_23_24() throws ParseException {
         FXMLThemNhanVienController nv = new FXMLThemNhanVienController();
 
-        nv.themNhanVien("", "Viet Tin", "Nam ", new java.sql.Date(21 - 05 - 1999), "Binh Dinh", 1);
+        int actual = nv.themNhanVien("", "Viet Tin", "Nam ", new java.sql.Date(21 - 05 - 1999), "Binh Dinh", 1);
+        int expected = 6;
+        Assert.assertEquals(expected, actual);
     }
 
     @Test

@@ -48,14 +48,14 @@ public class DangNhap {
     @Test
     public void testTCDN7_16_NV() throws SQLException{
         FXMLDangNhapController dn = new FXMLDangNhapController();
-        int actual = dn.dangNhap("viettin99", "123456789",JdbcTaiKhoan.getTaiKhoan(), false); 
+        int actual = dn.dangNhap("nhanvien", "nhanvien",JdbcTaiKhoan.getTaiKhoan(), false); 
         int expected = 3;
         Assert.assertEquals(expected, actual);
     }
     @Test
     public void testTCDN17() throws SQLException{
         FXMLDangNhapController dn = new FXMLDangNhapController();
-        int actual = dn.dangNhap("viettin99", "123456789",JdbcTaiKhoan.getTaiKhoan(), true); 
+        int actual = dn.dangNhap("nhanvien", "nhanvien",JdbcTaiKhoan.getTaiKhoan(), true); 
         int expected = 4;
         Assert.assertEquals(expected, actual);
     }

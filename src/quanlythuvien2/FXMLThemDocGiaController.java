@@ -59,7 +59,10 @@ public class FXMLThemDocGiaController implements Initializable {
                 }
             } catch (ParseException ex) {
                 kq = 3;
-            } catch (SQLException ex) {
+            }catch (NumberFormatException ex){
+                kq = 6;
+            } 
+            catch (SQLException ex) {
                 kq = 4;
             }
         
@@ -76,13 +79,7 @@ public class FXMLThemDocGiaController implements Initializable {
         }
         int kq = themDocGia(this.txtMaDG.getText(), this.txtTenDG.getText(),
                 gt, d, this.txtDiaChi.getText(), this.cbSoThe.getValue());
-        if (kq == 1 || kq == 3 || kq == 4 || kq == 5) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Lỗi ");
-            alert.setHeaderText("");
-            alert.setContentText("Vui lòng nhập đúng thông tin!");
-            alert.showAndWait();
-        } else if (kq == 2) {
+         if (kq == 2) {
             this.txtMaDG.clear();
             this.txtTenDG.clear();
             this.txtDiaChi.clear();
@@ -91,7 +88,13 @@ public class FXMLThemDocGiaController implements Initializable {
             alert.setHeaderText("");
             alert.setContentText("Thêm thành công!");
             alert.showAndWait();
-        }
+        }else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Lỗi ");
+            alert.setHeaderText("");
+            alert.setContentText("Vui lòng nhập đúng thông tin!");
+            alert.showAndWait();
+        } 
 //        try{
 //            Date d = Date.valueOf(this.txtNamSinh.getValue());
 //            String gt = "Nữ";

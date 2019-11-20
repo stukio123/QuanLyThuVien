@@ -34,17 +34,21 @@ public class ThemDocGia {
 //        int expected = 2;
 //        Assert.assertEquals(expected, actual);
 //    }
-    @Test(expected = NumberFormatException.class)
+    @Test
     public void testTCDG1() {
         FXMLThemDocGiaController dg = new FXMLThemDocGiaController();
-        dg.themDocGia("111111111111", "Tri Quang", "Nam ", new java.sql.Date(07 - 10 - 1999), "Ca Mau", 1751010043);
+        int actual = dg.themDocGia("111111111111", "Tri Quang", "Nam ", new java.sql.Date(07 - 10 - 1999), "Ca Mau", 1751010043);
+        int expected = 5;
+        Assert.assertEquals(expected, actual);
     }
 
-    @Test(expected = NumberFormatException.class)
+    @Test
     public void testTCDG2_3_4_5_22_23_24() throws ParseException {
         FXMLThemDocGiaController dg = new FXMLThemDocGiaController();
 
-        dg.themDocGia("", "Viet Tin", "Nam ", new java.sql.Date(21 - 05 - 1999), "Binh Dinh", 1751010005);
+        int actual = dg.themDocGia("", "Viet Tin", "Nam ", new java.sql.Date(21 - 05 - 1999), "Binh Dinh", 1751010005);
+        int expected = 6;
+        Assert.assertEquals(expected, actual);
     }
 
     @Test

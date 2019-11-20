@@ -59,6 +59,9 @@ public class FXMLThemNhanVienController implements Initializable {
         catch (SQLException ex) {
             kq = 4;
         }
+        catch(NumberFormatException ex){
+            kq = 6;
+        }
         if (ma.length() > 11 || ten.length() > 45 || gt.length() > 4 || dc.length() > 45) {
             kq = 5;
         }
@@ -78,13 +81,8 @@ public class FXMLThemNhanVienController implements Initializable {
             }
         }
         int kq = themNhanVien(txtMaNV.getText(), txtTenNV.getText(), gt, ns, txtDiaChi.getText(), ma);
-        if (kq == 1 || kq == 3 || kq == 5) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Lỗi ");
-            alert.setHeaderText("");
-            alert.setContentText("Vui lòng nhập đúng thông tin!");
-            alert.showAndWait();
-        } else if (kq == 2) {
+        System.err.println("kq");
+        if (kq == 2) {
             this.txtMaNV.clear();
             this.txtTenNV.clear();
             this.txtDiaChi.clear();
@@ -93,7 +91,13 @@ public class FXMLThemNhanVienController implements Initializable {
             alert.setHeaderText("");
             alert.setContentText("Thêm thành công!");
             alert.showAndWait();
-        }
+        }else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Lỗi ");
+            alert.setHeaderText("");
+            alert.setContentText("Vui lòng nhập đúng thông tin!");
+            alert.showAndWait();
+        }  
     }
 
     public void btHuyHandler(ActionEvent event) {
