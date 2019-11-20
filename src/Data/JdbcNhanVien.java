@@ -8,8 +8,6 @@ import java.sql.Statement;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.scene.control.Alert;
 import quanlythuvien2.models.NhanVien;
 
@@ -79,7 +77,6 @@ public class JdbcNhanVien {
             ps = Jdbc.getConn().prepareStatement("UPDATE nhanvien SET  hoten = ?, gioitinh = ?,"
                     + "namsinh = ?, diachi = ?,matk =? where manv = ?");
             ps.setInt(6, a.getMaNV());
-            
             ps.setString(1, a.getTenNV());
             ps.setString(2, a.getGioiTinh());
             ps.setDate(3, a.getNgaySinh());

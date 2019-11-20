@@ -119,6 +119,7 @@ public class FXMLThemSachController implements Initializable {
 //            alert.setContentText("Thêm  thất bại, lý do: " + ex.getMessage());
 //            alert.show();
 //        }
+
     }
 
     public void btHuyHandler(ActionEvent event) {

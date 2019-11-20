@@ -249,6 +249,8 @@ public class FXMLSachController implements Initializable {
             this.chucNang = "MuonSach";
             this.tbvTraSach.setVisible(false);
             this.vboxTraSach.setVisible(false);
+            this.vboxSuaDG.setVisible(false);
+            this.vboxSuaSach.setVisible(false);
 
             try {
                 this.loadMuonSach(JdbcMuonSach.getMS());
@@ -529,6 +531,7 @@ public class FXMLSachController implements Initializable {
 //            alert.setContentText("Lưu thất bại, lý do: " + ex.getMessage());
 //            alert.show();
 //        }
+
 
     }
     

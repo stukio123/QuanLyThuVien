@@ -13,6 +13,8 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -22,6 +24,7 @@ import quanlythuvien2.models.NhanVien;
 import quanlythuvien2.models.TaiKhoan;
 
 public class FXMLThemNhanVienController implements Initializable {
+
     @FXML
     private JFXTextField txtTenNV;
     @FXML
@@ -34,70 +37,80 @@ public class FXMLThemNhanVienController implements Initializable {
     private JFXRadioButton rdNam;
     @FXML
     private JFXRadioButton rdNu;
-    @FXML 
+    @FXML
     private JFXTextField txtMaNV;
     @FXML
     private JFXButton btThem;
     @FXML
     private JFXButton btHuy;
-    
-    
-    public void btThemHandler(ActionEvent event) throws ParseException, SQLException{
+
+    public int themNhanVien(String ma, String ten, String gt, Date ns, String dc, int matk) {
+        int kq = 0;
+        try {
+            NhanVien nv = new NhanVien(Integer.parseInt(ma), ten, gt, ns, dc, matk);
+            if (ma.equals("") || ten.equals("") || gt.equals("") || dc.equals("")) {
+                kq = 1;
+            } else {
+
+                JdbcNhanVien.addNhanVien(nv);
+                kq = 2;
+            }
+        }
+        catch (SQLException ex) {
+            kq = 4;
+        }
+        if (ma.length() > 11 || ten.length() > 45 || gt.length() > 4 || dc.length() > 45) {
+            kq = 5;
+        }
+        return kq;
+    }
+
+    public void btThemHandler(ActionEvent event) throws ParseException, SQLException {
         int ma = 0;
-        Date d = Date.valueOf(this.txtNamSinh.getValue());
+        Date ns = Date.valueOf(this.txtNamSinh.getValue());
         String gt = "Nữ";
-        for(TaiKhoan tk: JdbcTaiKhoan.getTaiKhoan1()){
-            if(tk.getTk().equals(this.cbMaTK.getValue())){
+        if (rdNam.isSelected()) {
+            gt = "Nam";
+        }
+        for (TaiKhoan tk : JdbcTaiKhoan.getTaiKhoan1()) {
+            if (tk.getTk().equals(this.cbMaTK.getValue())) {
                 ma = tk.getMatk();
             }
         }
-        try{
-        
-        if (this.rdNam.isSelected()) gt = "Nam";
-        NhanVien nv = new NhanVien(Integer.parseInt(this.txtMaNV.getText()),
-                this.txtTenNV.getText(),gt,d,this.txtDiaChi.getText(),
-                ma);
-        
-            JdbcNhanVien.addNhanVien(nv);
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setHeaderText("Thành Công");
-            alert.setContentText("Thêm nhân viên thành công");
+        int kq = themNhanVien(txtMaNV.getText(), txtTenNV.getText(), gt, ns, txtDiaChi.getText(), ma);
+        if (kq == 1 || kq == 3 || kq == 5) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Lỗi ");
+            alert.setHeaderText("");
+            alert.setContentText("Vui lòng nhập đúng thông tin!");
             alert.showAndWait();
-            Stage stage = (Stage)btThem.getScene().getWindow();
-            stage.close();
-        }catch(SQLException ex)
-        {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText("Thất Bại");
-            alert.setContentText("Lỗi khi thêm nhân viên");
-            alert.show();
-        }catch(NumberFormatException ex)
-        {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText("Thất Bại");
-            alert.setContentText("Lỗi khi thêm nhân viên\n" + ex.getMessage());
-            alert.show();
+        } else if (kq == 2) {
+            this.txtMaNV.clear();
+            this.txtTenNV.clear();
+            this.txtDiaChi.clear();
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Thông báo ");
+            alert.setHeaderText("");
+            alert.setContentText("Thêm thành công!");
+            alert.showAndWait();
         }
-        
-        
-    } 
-    
-    public void btHuyHandler(ActionEvent event){
-        Stage stage = (Stage)btHuy.getScene().getWindow();
+    }
+
+    public void btHuyHandler(ActionEvent event) {
+        Stage stage = (Stage) btHuy.getScene().getWindow();
         stage.close();
-     }
-    
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+
         try {
             List<String> maTK = JdbcTaiKhoan.getTaiKhoan2();
-             this.cbMaTK.getItems().addAll(maTK);
+            this.cbMaTK.getItems().addAll(maTK);
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
-           
-    }    
-        
-    
+
+    }
+
 }
