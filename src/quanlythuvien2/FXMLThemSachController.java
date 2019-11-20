@@ -62,7 +62,7 @@ public class FXMLThemSachController implements Initializable {
         int kq = themSach(this.txtMaSach.getText(), this.txtTenSach.getText(),
                 this.txtTacGia.getText(), this.txtTheLoai.getText(),
                 this.txtNxb.getText(), this.txtSoLuong.getText());
-        if (kq==3) {
+        if (kq == 3) {  
             this.txtMaSach.clear();
             this.txtTenSach.clear();
             this.txtTacGia.clear();
