@@ -158,7 +158,7 @@ public class FXMLSachController implements Initializable {
     private VBox vboxSuaNhanVien1;
     @FXML
     private VBox vboxSuaDG;
-    
+
     private int delNV = 0;
     private String delMaSach = "";
     private String chucNang = "";
@@ -287,7 +287,7 @@ public class FXMLSachController implements Initializable {
     public void loadDG(List a) throws SQLException {
 
         tbcMaDG.setCellValueFactory(new PropertyValueFactory<>("maDG"));
-        
+
         tbcTenDG.setCellValueFactory(new PropertyValueFactory<>("tenDG"));
 
         tbcGioiTinh.setCellValueFactory(new PropertyValueFactory<>("gioiTinh"));
@@ -308,7 +308,7 @@ public class FXMLSachController implements Initializable {
         System.out.println(delDG);
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Xóa Độc Giả");
-        alert.setContentText("Bạn có muốn xóa độc giả \n " + delDG +" | "+ tbvDG.getSelectionModel().getSelectedItem().getTenDG());
+        alert.setContentText("Bạn có muốn xóa độc giả \n " + delDG + " | " + tbvDG.getSelectionModel().getSelectedItem().getTenDG());
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
             JdbcDocGia.delDG(delDG);
@@ -330,7 +330,7 @@ public class FXMLSachController implements Initializable {
         this.txtNamSinhDG.setText(tbvDG.getSelectionModel().getSelectedItem().getNamSinh().toString());
         this.txtDiaChiDG.setText(tbvDG.getSelectionModel().getSelectedItem().getDiaChi());
         this.txtSoThe.setText(String.valueOf(tbvDG.getSelectionModel().getSelectedItem().getSoThe()));
-        
+
     }
 
     @FXML
@@ -341,28 +341,27 @@ public class FXMLSachController implements Initializable {
             loadDG(JdbcDocGia.getDG(this.txtTim.getText().trim()));
         }
     }
-    
+
     @FXML
-    public void LuuSuaDocGia(ActionEvent event){
-        try{
+    public void LuuSuaDocGia(ActionEvent event) {
+        try {
             DocGia a = new DocGia(
-                Integer.valueOf(this.txtMaDocGia.getText().trim()), 
-                this.txtTenDocGia.getText().trim(),
-                this.txtGioiTinhDG.getText().trim(),
-                Date.valueOf(this.txtNamSinhDG.getText().trim()),
-                this.txtDiaChiDG.getText().trim(), 
-                Integer.valueOf(this.txtSoThe.getText().trim())
-                );
+                    Integer.valueOf(this.txtMaDocGia.getText().trim()),
+                    this.txtTenDocGia.getText().trim(),
+                    this.txtGioiTinhDG.getText().trim(),
+                    Date.valueOf(this.txtNamSinhDG.getText().trim()),
+                    this.txtDiaChiDG.getText().trim(),
+                    Integer.valueOf(this.txtSoThe.getText().trim())
+            );
             if (JdbcDocGia.updateDocGia(a)) {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setContentText("Lưu Thành Công !!");
                 alert.show();
             }
             loadSach(getSach());
-        }catch(IllegalArgumentException | SQLException | ParseException ex)
-        {  
+        } catch (IllegalArgumentException | SQLException | ParseException ex) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Lưu thất bại\n"+ex.getMessage());
+            alert.setContentText("Lưu thất bại\n" + ex.getMessage());
             alert.show();
         }
 //        catch(NumberFormatException ex)
@@ -454,99 +453,85 @@ public class FXMLSachController implements Initializable {
     }
 
     @FXML
-    public void XoaSach() throws SQLException {
-
-        System.out.println(delMaSach);
+    public boolean XoaSach() throws SQLException {
+        boolean kq = false;
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Xóa Sách");
-        alert.setContentText("Bạn có muốn xóa sách \n " + delMaSach + " | "+tbvSach.getSelectionModel().getSelectedItem().getTenSach());
+        alert.setHeaderText("");
+        alert.setContentText("Bạn có muốn xóa sách \n " + delMaSach + " | " + tbvSach.getSelectionModel().getSelectedItem().getTenSach());
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
             delSach(delMaSach);
+            kq = true;
         }
         btnSua.setDisable(true);
         btnXoa.setDisable(true);
         loadSach(getSach());
-
+        return kq;
+    }
+    public int suaSach(String ma, String ten, String tg, String tl, String nxb, String sl){
+        int kq = 0;
+        if (ma.equals("") || ten.equals("") || tg.equals("") || tl.equals("") || nxb.equals("") || sl.equals("")) kq = 1;
+        else{
+            Sach s = new Sach(ma, ten, tg, tl, nxb, Integer.parseInt(sl.trim()));
+            if (ten.length()>45 || tg.length()>45 || tl.length()>45 || nxb.length()>45 || Integer.parseInt(sl.trim()) <0 ) kq =3;
+            
+            else if (JdbcSach.updateSach(s)) kq = 2;
+        }
+        return kq;
     }
 
     @FXML
-    public void LuuSuaSach(ActionEvent event) {
-//        if(this.txtMaSach.getText().trim().length() >= 11)
-//        {
-//            Alert alert = new Alert(Alert.AlertType.ERROR);
-//            alert.setHeaderText("");
-//            alert.setContentText("Mã sách vượt quá 10 ký tự");
-//            alert.show();
-//        }
-//        if(this.txtTenSachSua.getText().trim().length() >= 46)
-//        {
-//            Alert alert = new Alert(Alert.AlertType.ERROR);
-//            alert.setHeaderText("");
-//            alert.setContentText("Tên sách vượt quá 10 ký tự");
-//            alert.show();
-//        }
-//        if(this.txtTacGiaSua.getText().trim().length() >= 46)
-//        {
-//            Alert alert = new Alert(Alert.AlertType.ERROR);
-//            alert.setHeaderText("");
-//            alert.setContentText("Tên Tác Giả vượt quá 10 ký tự");
-//            alert.show();
-//        }
-//        if(this.txtTheLoaiSua.getText().trim().length() >= 46)
-//        {
-//            Alert alert = new Alert(Alert.AlertType.ERROR);
-//            alert.setHeaderText("");
-//            alert.setContentText("Thể Loại vượt quá 10 ký tự");
-//            alert.show();
-//        }
-//        if(this.txtNSXSua.getText().trim().length() >= 46)
-//        {
-//            Alert alert = new Alert(Alert.AlertType.ERROR);
-//            alert.setHeaderText("");
-//            alert.setContentText("Nhà Xuất Bản vượt quá 10 ký tự");
-//            alert.show();
-//        }
-//        if(this.txtSoLuongSua.getText().trim().length() >= 12)
-//        {
-//            Alert alert = new Alert(Alert.AlertType.ERROR);
-//            alert.setHeaderText("");
-//            alert.setContentText("Số Lượng vượt quá 11 đơn vị");
-//            alert.show();
-//        }
-        try{
-            Sach s = new Sach(this.txtMaSachSua.getText(), this.txtTenSachSua.getText().trim(),
-                this.txtTacGiaSua.getText().trim(), this.txtTheLoaiSua.getText().trim(), this.txtNSXSua.getText().trim(),
-                Integer.parseInt(this.txtSoLuongSua.getText().trim()));
-            if (JdbcSach.updateSach(s)) {
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.setContentText("Lưu Thành Công !!");
-                alert.show();
-                loadSach(getSach());
-            }
-        }catch(MysqlDataTruncation ex){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Lưu thất bại, lý do: " + ex.getMessage());
-            alert.show();
-        }catch(SQLException ex)
-        {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Lưu thất bại, lý do: " + ex.getMessage());
-            alert.show();
-        }catch(NumberFormatException ex)
-        {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Lưu thất bại, lý do: " + ex.getMessage());
-            alert.show();
-        }catch(Exception ex)
-        {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Lưu thất bại, lý do: " + ex.getMessage());
-            alert.show();
-        }
+    public void LuuSuaSach(ActionEvent event) throws SQLException {
         
-    }
+        int kq = suaSach(this.txtMaSachSua.getText(), this.txtTenSachSua.getText(),
+                this.txtTacGiaSua.getText(), this.txtTheLoaiSua.getText(), this.txtNSXSua.getText(),this.txtSoLuongSua.getText());
+         
+        if (kq == 2){
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Thông báo ");
+                alert.setHeaderText("");
+                alert.setContentText("Sửa thành công!");
+                alert.showAndWait();
+                loadSach(getSach());
+        }
+        else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Lỗi ");
+            alert.setHeaderText("");
+            alert.setContentText("Vui lòng nhập đúng thông tin!");
+            alert.showAndWait();
+        }
+//        try {
+//            Sach s = new Sach(this.txtMaSachSua.getText(), this.txtTenSachSua.getText().trim(),
+//                    this.txtTacGiaSua.getText().trim(), this.txtTheLoaiSua.getText().trim(), this.txtNSXSua.getText().trim(),
+//                    Integer.parseInt(this.txtSoLuongSua.getText().trim()));
+//            if (JdbcSach.updateSach(s)) {
+//                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+//                alert.setContentText("Lưu Thành Công !!");
+//                alert.show();
+//                loadSach(getSach());
+//            }
+//        } catch (MysqlDataTruncation ex) {
+//            Alert alert = new Alert(Alert.AlertType.ERROR);
+//            alert.setContentText("Lưu thất bại, lý do: " + ex.getMessage());
+//            alert.show();
+//        } catch (SQLException ex) {
+//            Alert alert = new Alert(Alert.AlertType.ERROR);
+//            alert.setContentText("Lưu thất bại, lý do: " + ex.getMessage());
+//            alert.show();
+//        } catch (NumberFormatException ex) {
+//            Alert alert = new Alert(Alert.AlertType.ERROR);
+//            alert.setContentText("Lưu thất bại, lý do: " + ex.getMessage());
+//            alert.show();
+//        } catch (Exception ex) {
+//            Alert alert = new Alert(Alert.AlertType.ERROR);
+//            alert.setContentText("Lưu thất bại, lý do: " + ex.getMessage());
+//            alert.show();
+//        }
 
+    }
+    
     //---------------------------------------------NHÂN VIÊN--------------------------------------------
     @FXML
     public void loadNV(List a) throws SQLException {
@@ -567,7 +552,7 @@ public class FXMLSachController implements Initializable {
         System.out.println(delNV);
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Xóa Nhân Viên");
-        alert.setContentText("Bạn có muốn xóa nhân viên \n " + delNV +" | "+tbvNV.getSelectionModel().getSelectedItem().getTenNV());
+        alert.setContentText("Bạn có muốn xóa nhân viên \n " + delNV + " | " + tbvNV.getSelectionModel().getSelectedItem().getTenNV());
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
             JdbcNhanVien.delNhanVien(delNV);
@@ -584,7 +569,7 @@ public class FXMLSachController implements Initializable {
         btnSua.setDisable(false);
         btnXoa.setDisable(false);
         delNV = tbvNV.getSelectionModel().getSelectedItem().getMaNV();
-        
+
         this.txtMaNhanVien.setText(String.valueOf(tbvNV.getSelectionModel().getSelectedItem().getMaNV()));
         this.txtTenNhanVien.setText(tbvNV.getSelectionModel().getSelectedItem().getTenNV());
         this.txtGioiTinh.setText(tbvNV.getSelectionModel().getSelectedItem().getGioiTinh());
@@ -602,28 +587,27 @@ public class FXMLSachController implements Initializable {
             this.loadNV(JdbcNhanVien.getNV(this.txtTim.getText().trim()));
         }
     }
-    
+
     @FXML
     public void LuuSuaNhanVien(ActionEvent event) {
-        try{
+        try {
             NhanVien a = new NhanVien(
-                Integer.valueOf(this.txtMaNhanVien.getText().trim()), 
-                this.txtTenNhanVien.getText().trim(),
-                this.txtGioiTinh.getText().trim(),
-                Date.valueOf(this.txtNamSinh.getText().trim()),
-                this.txtDiaChi.getText().trim(), 
-                Integer.valueOf(this.txtMaTK.getText().trim().trim())
-                );
+                    Integer.valueOf(this.txtMaNhanVien.getText().trim()),
+                    this.txtTenNhanVien.getText().trim(),
+                    this.txtGioiTinh.getText().trim(),
+                    Date.valueOf(this.txtNamSinh.getText().trim()),
+                    this.txtDiaChi.getText().trim(),
+                    Integer.valueOf(this.txtMaTK.getText().trim().trim())
+            );
             if (JdbcNhanVien.updateNhanVien(a)) {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setContentText("Lưu Thành Công !!");
                 alert.show();
             }
             loadSach(getSach());
-        }catch(IllegalArgumentException | SQLException ex)
-        {  
+        } catch (IllegalArgumentException | SQLException ex) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Lưu thất bại\n"+ex.getMessage());
+            alert.setContentText("Lưu thất bại\n" + ex.getMessage());
             alert.show();
         }
     }

@@ -52,7 +52,7 @@ public class FXMLThemNhanVienController implements Initializable {
             }
         }
         try{
-        //JOptionPane.showMessageDialog(null, ma, "Thông báo", 1);
+        
         if (this.rdNam.isSelected()) gt = "Nam";
         NhanVien nv = new NhanVien(Integer.parseInt(this.txtMaNV.getText()),
                 this.txtTenNV.getText(),gt,d,this.txtDiaChi.getText(),

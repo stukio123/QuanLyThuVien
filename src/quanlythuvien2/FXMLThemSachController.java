@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 import quanlythuvien2.models.Sach;
 
 public class FXMLThemSachController implements Initializable {
-    
+
     @FXML
     private JFXTextField txtMaSach;
     @FXML
@@ -32,87 +32,103 @@ public class FXMLThemSachController implements Initializable {
     private JFXButton btThem;
     @FXML
     private JFXButton btHuy;
-    
-    public void btThemHandler(ActionEvent event) throws SQLException, IOException{
-//        if(this.txtMaSach.getText().trim().length() >= 11)
-//        {
-//            Alert alert = new Alert(Alert.AlertType.ERROR);
-//            alert.setHeaderText("");
-//            alert.setContentText("Mã sách vượt quá 10 ký tự");
-//            alert.show();
-//        }
-//        if(this.txtTenSach.getText().trim().length() >= 46)
-//        {
-//            Alert alert = new Alert(Alert.AlertType.ERROR);
-//            alert.setHeaderText("");
-//            alert.setContentText("Tên sách vượt quá 10 ký tự");
-//            alert.show();
-//        }
-//        if(this.txtTacGia.getText().trim().length() >= 46)
-//        {
-//            Alert alert = new Alert(Alert.AlertType.ERROR);
-//            alert.setHeaderText("");
-//            alert.setContentText("Tên Tác Giả vượt quá 10 ký tự");
-//            alert.show();
-//        }
-//        if(this.txtTheLoai.getText().trim().length() >= 46)
-//        {
-//            Alert alert = new Alert(Alert.AlertType.ERROR);
-//            alert.setHeaderText("");
-//            alert.setContentText("Thể Loại vượt quá 10 ký tự");
-//            alert.show();
-//        }
-//        if(this.txtNxb.getText().trim().length() >= 46)
-//        {
-//            Alert alert = new Alert(Alert.AlertType.ERROR);
-//            alert.setHeaderText("");
-//            alert.setContentText("Nhà Xuất Bản vượt quá 10 ký tự");
-//            alert.show();
-//        }
-//        if(this.txtSoLuong.getText().trim().length() >= 12)
-//        {
-//            Alert alert = new Alert(Alert.AlertType.ERROR);
-//            alert.setHeaderText("");
-//            alert.setContentText("Số Lượng vượt quá 11 đơn vị");
-//            alert.show();
-//        }
-            try {
-                Sach s = new Sach(this.txtMaSach.getText(),this.txtTenSach.getText(),
-                        this.txtTacGia.getText(),this.txtTheLoai.getText(),
-                        this.txtNxb.getText(),Integer.parseInt(this.txtSoLuong.getText()));
-                JdbcSach.addSach(s);
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.setContentText("Thêm sách thành công !!");
-                alert.show();
-                txtMaSach.clear();
-                txtTenSach.clear();
-                txtTacGia.clear();
-                txtTheLoai.clear();
-                txtNxb.clear();
-                txtSoLuong.clear();
-                //Stage stage = (Stage)btThem.getScene().getWindow();
-                //stage.close();
-            } catch (SQLException ex) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setContentText("Thêm  thất bại, lý do: " + ex.getMessage());
-                alert.show();
-            } catch(NumberFormatException ex)
-            {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setContentText("Thêm  thất bại, lý do: " + ex.getMessage());
-                alert.show();
-            }
+
+    public int themSach(String maSach, String tenSach, String tacGia, String theLoai, String nxb, String soLuong) throws SQLException{
+
+        int kq = 0;
         
+        if (maSach.equals("") || tenSach.equals("") || theLoai.equals("")) {
+            kq = 1;
+        }
+
+        if (maSach.length() > 10 || tenSach.length() > 45 || tacGia.length() > 45
+                || theLoai.length() > 45 || nxb.length() > 45 || soLuong.length() > 45) {
+            kq = 2;
+        }else if (!maSach.equals("") && !tenSach.equals("")
+                && !theLoai.equals("") && soLuong.length() >1) {
+            Sach s = new Sach(maSach, tenSach, tacGia, theLoai, nxb, Integer.parseInt(soLuong));
+            if (s.getSoLuong() < 0 ) kq = 4;
+            else{
+            JdbcSach.addSach(s);
+            
+            kq = 3;
+            }
+        }
+       
+        return kq;
     }
-    
-     public void btHuyHandler(ActionEvent event){
-        Stage stage = (Stage)btHuy.getScene().getWindow();
+
+    public void btThemHandler(ActionEvent event) throws SQLException, IOException, NumberFormatException {
+        int kq = themSach(this.txtMaSach.getText(), this.txtTenSach.getText(),
+                this.txtTacGia.getText(), this.txtTheLoai.getText(),
+                this.txtNxb.getText(), this.txtSoLuong.getText());
+        if (kq==3) {
+            this.txtMaSach.clear();
+            this.txtTenSach.clear();
+            this.txtTacGia.clear();
+            this.txtTheLoai.clear();
+            this.txtNxb.clear();
+            this.txtSoLuong.clear();
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Thêm Sách");
+            alert.setHeaderText("");
+            alert.setContentText("Thêm thành công!");
+            alert.showAndWait();
+        } else if (kq==1) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Dữ liệu trống");
+            alert.setHeaderText("");
+            alert.setContentText("Vui lòng nhập đầy đủ thông tin!");
+            alert.showAndWait();
+        } else if (kq==2) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Dữ liệu quá dài");
+            alert.setHeaderText("");
+            alert.setContentText("Vui lòng nhập đúng!");
+            alert.showAndWait();
+        }else if (kq == 4){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Số lượng  nhỏ hơn 0");
+            alert.setHeaderText("");
+            alert.setContentText("Vui lòng nhập đúng!");
+            alert.showAndWait();
+        }
+
+//        try {
+//            Sach s = new Sach(this.txtMaSach.getText(), this.txtTenSach.getText(),
+//                    this.txtTacGia.getText(), this.txtTheLoai.getText(),
+//                    this.txtNxb.getText(), Integer.parseInt(this.txtSoLuong.getText()));
+//            JdbcSach.addSach(s);
+//            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+//            alert.setContentText("Thêm sách thành công !!");
+//            alert.show();
+//            txtMaSach.clear();
+//            txtTenSach.clear();
+//            txtTacGia.clear();
+//            txtTheLoai.clear();
+//            txtNxb.clear();
+//            txtSoLuong.clear();
+//            //Stage stage = (Stage)btThem.getScene().getWindow();
+//            //stage.close();
+//        } catch (SQLException ex) {
+//            Alert alert = new Alert(Alert.AlertType.ERROR);
+//            alert.setContentText("Thêm  thất bại, lý do: " + ex.getMessage());
+//            alert.show();
+//        } catch (NumberFormatException ex) {
+//            Alert alert = new Alert(Alert.AlertType.ERROR);
+//            alert.setContentText("Thêm  thất bại, lý do: " + ex.getMessage());
+//            alert.show();
+//        }
+    }
+
+    public void btHuyHandler(ActionEvent event) {
+        Stage stage = (Stage) btHuy.getScene().getWindow();
         stage.close();
-     }
-    
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-    
+    }
+
 }
