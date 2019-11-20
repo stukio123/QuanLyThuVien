@@ -13,6 +13,8 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -41,45 +43,44 @@ public class FXMLThemNhanVienController implements Initializable {
     @FXML
     private JFXButton btHuy;
     
-    
-    public void btThemHandler(ActionEvent event) throws ParseException, SQLException{
+    public boolean themNV(){
         int ma = 0;
         Date d = Date.valueOf(this.txtNamSinh.getValue());
         String gt = "Nữ";
-        for(TaiKhoan tk: JdbcTaiKhoan.getTaiKhoan1()){
-            if(tk.getTk().equals(this.cbMaTK.getValue())){
-                ma = tk.getMatk();
+        try {
+            for(TaiKhoan tk: JdbcTaiKhoan.getTaiKhoan1()){
+                if(tk.getTk().equals(this.cbMaTK.getValue())){
+                    ma = tk.getMatk();
+                }
             }
-        }
-        try{
-        //JOptionPane.showMessageDialog(null, ma, "Thông báo", 1);
-        if (this.rdNam.isSelected()) gt = "Nam";
-        NhanVien nv = new NhanVien(Integer.parseInt(this.txtMaNV.getText()),
-                this.txtTenNV.getText(),gt,d,this.txtDiaChi.getText(),
-                ma);
-        
+            if (this.rdNam.isSelected()) gt = "Nam";
+            NhanVien nv = new NhanVien(Integer.parseInt(this.txtMaNV.getText()),
+                    this.txtTenNV.getText(),gt,d,this.txtDiaChi.getText(),
+                    ma);
             JdbcNhanVien.addNhanVien(nv);
+            return true;
+        } catch (SQLException | NumberFormatException ex) {
+            Logger.getLogger(FXMLThemNhanVienController.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+        
+    }
+    
+    public void btThemHandler(ActionEvent event) throws ParseException, SQLException{
+        if(themNV()){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setHeaderText("Thành Công");
             alert.setContentText("Thêm nhân viên thành công");
             alert.showAndWait();
             Stage stage = (Stage)btThem.getScene().getWindow();
             stage.close();
-        }catch(SQLException ex)
+        }else
         {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText("Thất Bại");
-            alert.setContentText("Lỗi khi thêm nhân viên");
-            alert.show();
-        }catch(NumberFormatException ex)
-        {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText("Thất Bại");
-            alert.setContentText("Lỗi khi thêm nhân viên\n" + ex.getMessage());
+            alert.setContentText("Lỗi khi thêm nhân viên\n");
             alert.show();
         }
-        
-        
     } 
     
     public void btHuyHandler(ActionEvent event){
